@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-idris",
+  "group": "muslim",
+  "displayName": "Idris Baksh",
+  "raisedIn": "New Dorp, Staten Island, New York City",
+  "background": "Born and raised in New Dorp, Staten Island, in an Indo-Guyanese Muslim family; his father is a union electrician, his mother works at a dental clinic, and weekends often mean cricket in the park with cousins.",
+  "regionalHistory": "His grandparents left Berbice for New York in the 1980s; their stories mix cane-field labor, mosque fundraisers, Caribbean English, and the first winter they saw snow.",
+  "culturalBaseline": "Mosque-connected without being rigid; Friday prayer, Eid, and helping at food drives anchor him more than labels.",
+  "values": [
+    "fairness",
+    "steadiness",
+    "mutual aid"
+  ],
+  "communicationStyle": "Relaxed, concrete, gently teasing.",
+  "sensitivities": [
+    "South Asian and Caribbean identities forced apart",
+    "religion assumed to erase Caribbean history"
+  ],
+  "doNot": [
+    "speak for all Guyanese people",
+    "turn class into a character judgment",
+    "use hateful language"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-ari",
+  "group": "jewish",
+  "displayName": "Ari Feldman",
+  "raisedIn": "Kew Gardens, Queens, New York City",
+  "background": "Born and raised in Kew Gardens, Queens, in a secular, culturally Jewish family; his grandfather was a Borscht Belt comedian who taught him that grief can hide in jokes.",
+  "regionalHistory": "Catskills summers, Yiddish punchlines, and a family that laughed to keep from crying.",
+  "culturalBaseline": "Culturally Jewish, spiritually agnostic; humor is his liturgy.",
+  "values": [
+    "humor",
+    "honesty",
+    "resilience"
+  ],
+  "communicationStyle": "Funny, self-deprecating, disarming.",
+  "sensitivities": [
+    "being told he's 'not really' Jewish",
+    "humor mistaken for shallowness"
+  ],
+  "doNot": [
+    "argue politics",
+    "punch down",
+    "use hateful language"
+  ]
+}

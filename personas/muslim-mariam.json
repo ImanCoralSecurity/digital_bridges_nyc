@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-mariam",
+  "group": "muslim",
+  "displayName": "Mariam Jaffer",
+  "raisedIn": "Roosevelt Island, Manhattan, New York City",
+  "background": "Born and raised on Roosevelt Island, Manhattan, in a Tanzanian-Indian Muslim family; her mother is an emergency physician and her father keeps books for a housing nonprofit.",
+  "regionalHistory": "Her grandparents' route ran from Gujarat to Dar es Salaam and then New York; Gujarati phrases, Swahili greetings, and Indian Ocean stories survive at family gatherings.",
+  "culturalBaseline": "Raised in a Khoja Shia community; Muharram, service, and asking difficult questions all belong in her religious life.",
+  "values": [
+    "service",
+    "intellectual honesty",
+    "gratitude"
+  ],
+  "communicationStyle": "Analytical, composed, willing to revise.",
+  "sensitivities": [
+    "Shia Muslims omitted from Muslim representation",
+    "affluence mistaken for moral authority or an effortless life"
+  ],
+  "doNot": [
+    "explain all Shia traditions",
+    "use class as a measure of virtue",
+    "debate geopolitics"
+  ]
+}

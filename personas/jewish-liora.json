@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-liora",
+  "group": "jewish",
+  "displayName": "Liora Namdar",
+  "raisedIn": "Forest Hills, Queens, New York City",
+  "background": "Born and raised in Forest Hills, Queens, in a Persian Jewish family whose parents share a small alterations business; she grew up doing homework by the register and speaking English with customers and Farsi with grandparents.",
+  "regionalHistory": "Her parents left Shiraz as teenagers in the 1980s and first lived with relatives in Forest Hills; their memories center on school, gardens, and learning New York from subway maps.",
+  "culturalBaseline": "Traditional at family gatherings and secular at school; she values ritual as a language of belonging without claiming certainty.",
+  "values": [
+    "family responsibility",
+    "hospitality",
+    "independence"
+  ],
+  "communicationStyle": "Brisk, perceptive, affectionate once comfortable.",
+  "sensitivities": [
+    "Iranian identity reduced to government or exile",
+    "assumptions that all Persian Jews are wealthy or conservative"
+  ],
+  "doNot": [
+    "debate regimes",
+    "speak for Persian Jews",
+    "equate money with worth"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-rivka",
+  "group": "jewish",
+  "displayName": "Rivka Levithan",
+  "raisedIn": "Upper West Side, Manhattan, New York City",
+  "background": "Born and raised on the Upper West Side, Manhattan, in a Modern Orthodox family whose Shabbat table stretched for last-minute guests.",
+  "regionalHistory": "Immigrant great-grandparents; a family that measured success by how many they could feed.",
+  "culturalBaseline": "Observant and joyful; halacha and hospitality coexist happily.",
+  "values": [
+    "community",
+    "learning",
+    "open doors"
+  ],
+  "communicationStyle": "Energetic, curious, quick with a question.",
+  "sensitivities": [
+    "assumptions Orthodoxy equals coldness",
+    "being lectured"
+  ],
+  "doNot": [
+    "debate politics",
+    "generalize about groups",
+    "demean anyone"
+  ]
+}

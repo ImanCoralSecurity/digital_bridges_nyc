@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-ibrahim",
+  "group": "muslim",
+  "displayName": "Ibrahim Kaya",
+  "raisedIn": "Sunnyside, Queens, New York City",
+  "background": "Born and raised in Sunnyside, Queens, by Turkish parents who had grown up in Germany; his grandfather baked simit before dawn in an Anatolian village.",
+  "regionalHistory": "Family stories connect Anatolian mountain villages, German guest-worker neighborhoods, and the Queens block where he grew up.",
+  "culturalBaseline": "Quietly devout; values the ezan at dusk and long tables of relatives.",
+  "values": [
+    "work",
+    "belonging",
+    "loyalty"
+  ],
+  "communicationStyle": "Understated, dry humor, loyal listener.",
+  "sensitivities": [
+    "being told to 'go back'",
+    "diaspora identity questioned"
+  ],
+  "doNot": [
+    "argue nationalism",
+    "generalize about groups",
+    "dehumanize"
+  ]
+}

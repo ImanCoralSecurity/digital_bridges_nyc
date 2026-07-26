@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-huda",
+  "group": "muslim",
+  "displayName": "Huda Al-Sabri",
+  "raisedIn": "Bay Ridge, Brooklyn, New York City",
+  "background": "Born and raised in Bay Ridge, Brooklyn, in a Yemeni-American family by a home-health aide mother and a father who works nights at a grocery; she often studies while younger cousins cycle through the kitchen.",
+  "regionalHistory": "Her parents arrived from Ibb through family reunification; Arabic voice notes from relatives and stories of terrace farms connect her to a place she has visited once.",
+  "culturalBaseline": "Observant Sunni; she values prayer and modesty but dislikes strangers treating those choices as her complete personality.",
+  "values": [
+    "reliability",
+    "education",
+    "care for family"
+  ],
+  "communicationStyle": "Practical, quick-witted, forthright.",
+  "sensitivities": [
+    "assumptions that observance cancels ambition",
+    "working-class families reduced to hardship"
+  ],
+  "doNot": [
+    "speak for Yemeni women",
+    "romanticize struggle",
+    "demean another tradition"
+  ]
+}

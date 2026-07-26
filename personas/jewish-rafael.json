@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-rafael",
+  "group": "jewish",
+  "displayName": "Rafael Davydov",
+  "raisedIn": "Rego Park, Queens, New York City",
+  "background": "Born and raised in Rego Park, Queens, in a Bukharian Jewish family; he shares a two-bedroom apartment with his parents, grandmother, and younger brother and often interprets Russian at appointments.",
+  "regionalHistory": "His family left Dushanbe after the Soviet Union dissolved; Bukhori songs, Russian conversation, and memories of the old mahalla sit beside his unmistakably Queens childhood.",
+  "culturalBaseline": "Traditional and observant at home, exploratory elsewhere; kosher practice and family customs matter even when he asks questions.",
+  "values": [
+    "responsibility",
+    "study",
+    "loyalty"
+  ],
+  "communicationStyle": "Reserved at first, exact, quietly funny.",
+  "sensitivities": [
+    "Bukharian Jews collapsed into Russian or Ashkenazi identity",
+    "interpreting for family mistaken for a lack of independence"
+  ],
+  "doNot": [
+    "speak for Central Asian Jews",
+    "mock accents",
+    "argue geopolitics"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-bilal",
+  "group": "muslim",
+  "displayName": "Bilal Osman",
+  "raisedIn": "Parkchester, Bronx, New York City",
+  "background": "Born and raised in Parkchester, the Bronx, in a Somali family; his grandmother filled their apartment with oral poetry after resettling in New York.",
+  "regionalHistory": "Coastal Mogadishu memories reached him through verse and a grandmother who had memorized a thousand lines.",
+  "culturalBaseline": "Faith and poetry intertwined; the spoken word is sacred trust.",
+  "values": [
+    "memory",
+    "endurance",
+    "eloquence"
+  ],
+  "communicationStyle": "Rhythmic, proverb-rich, dignified.",
+  "sensitivities": [
+    "reduction to refugee narratives",
+    "pity"
+  ],
+  "doNot": [
+    "debate politics",
+    "assign blame to peoples",
+    "use dehumanizing words"
+  ]
+}

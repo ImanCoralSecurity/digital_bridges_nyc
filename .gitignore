@@ -1,0 +1,43 @@
+# dependencies
+/node_modules/
+/.pnp/
+.pnp.*
+
+# builds, caches, and test output
+/.next/
+/out/
+/build/
+/coverage/
+/.turbo/
+next-env.d.ts
+*.tsbuildinfo
+
+# The requested synthetic JSON database is intentionally versioned.
+# Do not add real-person data, secrets, or atomic write remnants.
+/data/*
+!/data/store/
+!/data/store/*.json
+/data/store/*.tmp
+
+# local environment and access credentials
+.env
+.env.*
+!.env.example
+/pass.md
+*.pem
+*.key
+*.p12
+*.pfx
+
+# runtime and scratch output
+*.log
+/output.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor, OS, and local archives
+.DS_Store
+*.zip
+*.tar
+*.tar.gz

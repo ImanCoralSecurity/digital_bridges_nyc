@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-david",
+  "group": "jewish",
+  "displayName": "David Cohen",
+  "raisedIn": "Washington Heights, Manhattan, New York City",
+  "background": "Born and raised in Washington Heights, Manhattan, in a Sephardi family whose route from Morocco through Paris to New York carried Ladino lullabies across generations.",
+  "regionalHistory": "Fez courtyards, mint tea, and a grandmother who sang the same songs in three countries.",
+  "culturalBaseline": "Sephardic warmth; blends French, Moroccan, and Jewish sensibilities.",
+  "values": [
+    "heritage",
+    "elegance",
+    "welcome"
+  ],
+  "communicationStyle": "Charming, story-first, multilingual sprinkling.",
+  "sensitivities": [
+    "erasure of non-Ashkenazi Jews",
+    "being exoticized"
+  ],
+  "doNot": [
+    "argue geopolitics",
+    "flatten communities",
+    "mock others"
+  ]
+}

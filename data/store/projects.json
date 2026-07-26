@@ -1,0 +1,1447 @@
+[
+  {
+    "id": "project_8604193032a6",
+    "name": "Test",
+    "createdAt": "2026-07-18T23:06:40.783Z",
+    "updatedAt": "2026-07-19T07:25:18.264Z",
+    "status": "completed",
+    "sessionCount": 2,
+    "attendeeIds": [
+      "jewish-ari",
+      "jewish-daniel",
+      "jewish-david",
+      "jewish-eliana",
+      "jewish-gabriel",
+      "jewish-hannah",
+      "jewish-liora",
+      "jewish-maya",
+      "jewish-miriam",
+      "jewish-naomi",
+      "jewish-rafael",
+      "jewish-rivka",
+      "jewish-sofia",
+      "jewish-tamar",
+      "jewish-yael",
+      "muslim-amina",
+      "muslim-bilal",
+      "muslim-fatima",
+      "muslim-huda",
+      "muslim-ibrahim",
+      "muslim-idris",
+      "muslim-leila",
+      "muslim-mariam",
+      "muslim-nadia",
+      "muslim-nura",
+      "muslim-omar",
+      "muslim-sana",
+      "muslim-yasmin",
+      "muslim-yusuf",
+      "muslim-zahra"
+    ],
+    "attendees": [
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-david",
+        "name": "David Cohen",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-eliana",
+        "name": "Eliana Tesfaye",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-gabriel",
+        "name": "Gabriel Santana",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-hannah",
+        "name": "Hannah Stern",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-liora",
+        "name": "Liora Namdar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-maya",
+        "name": "Maya Samuel",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-miriam",
+        "name": "Miriam Kaplan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-naomi",
+        "name": "Naomi Brooks",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rafael",
+        "name": "Rafael Davydov",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rivka",
+        "name": "Rivka Levithan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-sofia",
+        "name": "Sofia Abramovich",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-tamar",
+        "name": "Tamar Mizrahi",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-yael",
+        "name": "Yael Rosen",
+        "group": "jewish"
+      },
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-fatima",
+        "name": "Fatima Qureshi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-huda",
+        "name": "Huda Al-Sabri",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-ibrahim",
+        "name": "Ibrahim Kaya",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-idris",
+        "name": "Idris Baksh",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-leila",
+        "name": "Leila Karimi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-mariam",
+        "name": "Mariam Jaffer",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nadia",
+        "name": "Nadia Hassan",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nura",
+        "name": "Nura Rivera",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-omar",
+        "name": "Omar Diallo",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-sana",
+        "name": "Sana Abdullah",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yasmin",
+        "name": "Yasmin Berisha",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yusuf",
+        "name": "Yusuf El-Amin",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-zahra",
+        "name": "Zahra Chen",
+        "group": "muslim"
+      }
+    ],
+    "controversialPerCommunity": 4,
+    "controversialAgentIds": [
+      "muslim-leila",
+      "muslim-amina",
+      "muslim-omar",
+      "muslim-zahra",
+      "jewish-eliana",
+      "jewish-tamar",
+      "jewish-rivka",
+      "jewish-maya"
+    ],
+    "provider": "codex",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "low",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_e4ea84d96cac",
+        "projectId": "project_8604193032a6",
+        "number": 1,
+        "topic": "Introducing unique, multi-generational family narratives and regional micro-histories to establish each agent's cultural baseline",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-18T23:06:40.783Z",
+        "updatedAt": "2026-07-19T06:00:55.828Z",
+        "runId": "run_b8e492df7a8f"
+      },
+      {
+        "id": "session_6b0d7946b51b",
+        "projectId": "project_8604193032a6",
+        "number": 2,
+        "topic": "Introducing unique, multi-generational family narratives and regional micro-histories to establish each agent's cultural baseline",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-18T23:06:40.783Z",
+        "updatedAt": "2026-07-19T07:25:18.264Z",
+        "runId": "run_f4ddae553243",
+        "jobId": "job_adeccacaba52"
+      }
+    ]
+  },
+  {
+    "id": "project_0329b67e0d0c",
+    "name": "Mini",
+    "createdAt": "2026-07-19T07:11:39.903Z",
+    "updatedAt": "2026-07-20T23:21:30.782Z",
+    "status": "completed",
+    "sessionCount": 3,
+    "attendeeIds": [
+      "muslim-amina",
+      "muslim-bilal",
+      "jewish-ari",
+      "jewish-daniel"
+    ],
+    "attendees": [
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      }
+    ],
+    "controversialPerCommunity": 1,
+    "controversialAgentIds": [
+      "muslim-bilal",
+      "jewish-daniel"
+    ],
+    "provider": "codex",
+    "model": "gpt-5.3-codex-spark",
+    "reasoningEffort": "medium",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_704a6b3fa172",
+        "projectId": "project_0329b67e0d0c",
+        "number": 1,
+        "topic": "Introducing unique, multi-generational family narratives and regional micro-histories",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-19T07:11:39.903Z",
+        "updatedAt": "2026-07-20T23:21:30.782Z",
+        "jobId": "job_2255d2d79654",
+        "runId": "run_6088700182bd"
+      },
+      {
+        "id": "session_805a23f29291",
+        "projectId": "project_0329b67e0d0c",
+        "number": 2,
+        "topic": "Gaza war",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-19T07:11:39.903Z",
+        "updatedAt": "2026-07-20T06:39:08.742Z",
+        "jobId": "job_d4512e210b26",
+        "runId": "run_55a14cdae422"
+      },
+      {
+        "id": "session_09cf2508a41e",
+        "projectId": "project_0329b67e0d0c",
+        "number": 3,
+        "topic": "How can we improve peace between jewish and muslims",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-19T07:11:39.903Z",
+        "updatedAt": "2026-07-20T22:54:25.026Z",
+        "jobId": "job_a9e3b3d31c1c",
+        "runId": "run_9b9e2ca970d6"
+      }
+    ]
+  },
+  {
+    "id": "project_e1078cf5eb00",
+    "name": "Digital Bridges NYC",
+    "createdAt": "2026-07-20T23:15:59.214Z",
+    "updatedAt": "2026-07-22T04:12:37.518Z",
+    "status": "active",
+    "sessionCount": 6,
+    "attendeeIds": [
+      "jewish-ari",
+      "jewish-daniel",
+      "jewish-david",
+      "jewish-eliana",
+      "jewish-gabriel",
+      "jewish-hannah",
+      "jewish-liora",
+      "jewish-maya",
+      "jewish-miriam",
+      "jewish-naomi",
+      "jewish-rafael",
+      "jewish-rivka",
+      "jewish-sofia",
+      "jewish-tamar",
+      "jewish-yael",
+      "muslim-amina",
+      "muslim-bilal",
+      "muslim-fatima",
+      "muslim-huda",
+      "muslim-ibrahim",
+      "muslim-idris",
+      "muslim-leila",
+      "muslim-mariam",
+      "muslim-nadia",
+      "muslim-nura",
+      "muslim-omar",
+      "muslim-sana",
+      "muslim-yasmin",
+      "muslim-yusuf",
+      "muslim-zahra"
+    ],
+    "attendees": [
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-david",
+        "name": "David Cohen",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-eliana",
+        "name": "Eliana Tesfaye",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-gabriel",
+        "name": "Gabriel Santana",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-hannah",
+        "name": "Hannah Stern",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-liora",
+        "name": "Liora Namdar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-maya",
+        "name": "Maya Samuel",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-miriam",
+        "name": "Miriam Kaplan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-naomi",
+        "name": "Naomi Brooks",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rafael",
+        "name": "Rafael Davydov",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rivka",
+        "name": "Rivka Levithan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-sofia",
+        "name": "Sofia Abramovich",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-tamar",
+        "name": "Tamar Mizrahi",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-yael",
+        "name": "Yael Rosen",
+        "group": "jewish"
+      },
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-fatima",
+        "name": "Fatima Qureshi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-huda",
+        "name": "Huda Al-Sabri",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-ibrahim",
+        "name": "Ibrahim Kaya",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-idris",
+        "name": "Idris Baksh",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-leila",
+        "name": "Leila Karimi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-mariam",
+        "name": "Mariam Jaffer",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nadia",
+        "name": "Nadia Hassan",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nura",
+        "name": "Nura Rivera",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-omar",
+        "name": "Omar Diallo",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-sana",
+        "name": "Sana Abdullah",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yasmin",
+        "name": "Yasmin Berisha",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yusuf",
+        "name": "Yusuf El-Amin",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-zahra",
+        "name": "Zahra Chen",
+        "group": "muslim"
+      }
+    ],
+    "controversialPerCommunity": 3,
+    "controversialAgentIds": [
+      "muslim-ibrahim",
+      "muslim-yusuf",
+      "muslim-huda",
+      "jewish-sofia",
+      "jewish-naomi",
+      "jewish-miriam"
+    ],
+    "provider": "codex",
+    "model": "gpt-5.3-codex-spark",
+    "reasoningEffort": "medium",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_ff37c693dbc1",
+        "projectId": "project_e1078cf5eb00",
+        "number": 1,
+        "topic": "Introducing unique, multi-generational family narratives and regional micro-histories to establish each other's cultural baseline.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-22T04:12:37.518Z",
+        "jobId": "job_b632bc027d43",
+        "runId": "run_3b7e9e2f1640"
+      },
+      {
+        "id": "session_fb885ef1e837",
+        "projectId": "project_e1078cf5eb00",
+        "number": 2,
+        "topic": "Sharing traditional rituals, holidays, or community practices from each persona's upbringing that anchor their daily lives.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-21T00:27:21.882Z",
+        "jobId": "job_ad7293ded8df",
+        "runId": "run_5d84b983cba7"
+      },
+      {
+        "id": "session_32d43082e41a",
+        "projectId": "project_e1078cf5eb00",
+        "number": 3,
+        "topic": "How can we improve muslim and jewish people relationships",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-21T17:25:13.871Z",
+        "jobId": "job_f649ae638b4a",
+        "runId": "run_ae0b63ac4641"
+      },
+      {
+        "id": "session_ea5a12a95c19",
+        "projectId": "project_e1078cf5eb00",
+        "number": 4,
+        "topic": "",
+        "rounds": null,
+        "mandatoryIntroductionRound": false,
+        "status": "unconfigured",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-20T23:15:59.214Z"
+      },
+      {
+        "id": "session_ef7f9f55e0e1",
+        "projectId": "project_e1078cf5eb00",
+        "number": 5,
+        "topic": "",
+        "rounds": null,
+        "mandatoryIntroductionRound": false,
+        "status": "unconfigured",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-20T23:15:59.214Z"
+      },
+      {
+        "id": "session_b56ad00a26dd",
+        "projectId": "project_e1078cf5eb00",
+        "number": 6,
+        "topic": "",
+        "rounds": null,
+        "mandatoryIntroductionRound": false,
+        "status": "unconfigured",
+        "statusReason": "",
+        "createdAt": "2026-07-20T23:15:59.214Z",
+        "updatedAt": "2026-07-20T23:15:59.214Z"
+      }
+    ]
+  },
+  {
+    "id": "project_5022fe245535",
+    "name": "NYC1",
+    "projectIntroduction": "The project has 6 sessions and we want work on peace building between jews and muslims",
+    "createdAt": "2026-07-24T05:37:28.140Z",
+    "updatedAt": "2026-07-24T06:37:20.302Z",
+    "status": "active",
+    "sessionCount": 3,
+    "attendeeIds": [
+      "jewish-ari",
+      "jewish-daniel",
+      "jewish-david",
+      "jewish-eliana",
+      "jewish-gabriel",
+      "jewish-hannah",
+      "jewish-liora",
+      "jewish-maya",
+      "jewish-miriam",
+      "jewish-naomi",
+      "jewish-rafael",
+      "jewish-rivka",
+      "jewish-sofia",
+      "jewish-tamar",
+      "jewish-yael",
+      "muslim-amina",
+      "muslim-bilal",
+      "muslim-fatima",
+      "muslim-huda",
+      "muslim-ibrahim",
+      "muslim-idris",
+      "muslim-leila",
+      "muslim-mariam",
+      "muslim-nadia",
+      "muslim-nura",
+      "muslim-omar",
+      "muslim-sana",
+      "muslim-yasmin",
+      "muslim-yusuf",
+      "muslim-zahra"
+    ],
+    "attendees": [
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-david",
+        "name": "David Cohen",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-eliana",
+        "name": "Eliana Tesfaye",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-gabriel",
+        "name": "Gabriel Santana",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-hannah",
+        "name": "Hannah Stern",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-liora",
+        "name": "Liora Namdar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-maya",
+        "name": "Maya Samuel",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-miriam",
+        "name": "Miriam Kaplan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-naomi",
+        "name": "Naomi Brooks",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rafael",
+        "name": "Rafael Davydov",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rivka",
+        "name": "Rivka Levithan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-sofia",
+        "name": "Sofia Abramovich",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-tamar",
+        "name": "Tamar Mizrahi",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-yael",
+        "name": "Yael Rosen",
+        "group": "jewish"
+      },
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-fatima",
+        "name": "Fatima Qureshi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-huda",
+        "name": "Huda Al-Sabri",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-ibrahim",
+        "name": "Ibrahim Kaya",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-idris",
+        "name": "Idris Baksh",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-leila",
+        "name": "Leila Karimi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-mariam",
+        "name": "Mariam Jaffer",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nadia",
+        "name": "Nadia Hassan",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nura",
+        "name": "Nura Rivera",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-omar",
+        "name": "Omar Diallo",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-sana",
+        "name": "Sana Abdullah",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yasmin",
+        "name": "Yasmin Berisha",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yusuf",
+        "name": "Yusuf El-Amin",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-zahra",
+        "name": "Zahra Chen",
+        "group": "muslim"
+      }
+    ],
+    "controversialPerCommunity": 0,
+    "controversialAgentIds": [],
+    "provider": "codex",
+    "model": "gpt-5.3-codex-spark",
+    "reasoningEffort": "medium",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_77afbe8f3e58",
+        "projectId": "project_5022fe245535",
+        "number": 1,
+        "topic": "Introducing unique, multi-generational family narratives and regional micro-histories to establish each other's cultural baseline.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-24T05:37:28.140Z",
+        "updatedAt": "2026-07-24T06:37:20.302Z",
+        "jobId": "job_1eb71b8ff3ef",
+        "runId": "run_b7991802d1b6"
+      },
+      {
+        "id": "session_77bec8837233",
+        "projectId": "project_5022fe245535",
+        "number": 2,
+        "topic": "",
+        "rounds": null,
+        "mandatoryIntroductionRound": false,
+        "status": "unconfigured",
+        "statusReason": "",
+        "createdAt": "2026-07-24T05:37:28.140Z",
+        "updatedAt": "2026-07-24T05:37:28.140Z"
+      },
+      {
+        "id": "session_27e3a44aed79",
+        "projectId": "project_5022fe245535",
+        "number": 3,
+        "topic": "",
+        "rounds": null,
+        "mandatoryIntroductionRound": false,
+        "status": "unconfigured",
+        "statusReason": "",
+        "createdAt": "2026-07-24T05:37:28.140Z",
+        "updatedAt": "2026-07-24T05:37:28.140Z"
+      }
+    ]
+  },
+  {
+    "id": "project_ad7abfeb42ef",
+    "name": "Projects for Peace",
+    "projectIntroduction": "Over the course of this initiative, we will gather for six structured sessions. Our overarching goal is to bridge the divides that often feel insurmountable in our current climate. By moving step-by-step through a shared dialogue process, we will explore our unique histories, navigate the friction of online stereotypes, and come closer together. Ultimately, our work across these six sessions will culminate in co-creating a collaborative digital peace campaign to share with our wider community.",
+    "createdAt": "2026-07-25T06:38:06.610Z",
+    "updatedAt": "2026-07-25T16:34:27.350Z",
+    "status": "active",
+    "sessionCount": 6,
+    "attendeeIds": [
+      "jewish-ari",
+      "jewish-daniel",
+      "jewish-david",
+      "jewish-eliana",
+      "jewish-gabriel",
+      "jewish-hannah",
+      "jewish-liora",
+      "jewish-maya",
+      "jewish-miriam",
+      "jewish-naomi",
+      "jewish-rafael",
+      "jewish-rivka",
+      "jewish-sofia",
+      "jewish-tamar",
+      "jewish-yael",
+      "muslim-amina",
+      "muslim-bilal",
+      "muslim-fatima",
+      "muslim-huda",
+      "muslim-ibrahim",
+      "muslim-idris",
+      "muslim-leila",
+      "muslim-mariam",
+      "muslim-nadia",
+      "muslim-nura",
+      "muslim-omar",
+      "muslim-sana",
+      "muslim-yasmin",
+      "muslim-yusuf",
+      "muslim-zahra"
+    ],
+    "attendees": [
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-david",
+        "name": "David Cohen",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-eliana",
+        "name": "Eliana Tesfaye",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-gabriel",
+        "name": "Gabriel Santana",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-hannah",
+        "name": "Hannah Stern",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-liora",
+        "name": "Liora Namdar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-maya",
+        "name": "Maya Samuel",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-miriam",
+        "name": "Miriam Kaplan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-naomi",
+        "name": "Naomi Brooks",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rafael",
+        "name": "Rafael Davydov",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rivka",
+        "name": "Rivka Levithan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-sofia",
+        "name": "Sofia Abramovich",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-tamar",
+        "name": "Tamar Mizrahi",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-yael",
+        "name": "Yael Rosen",
+        "group": "jewish"
+      },
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-fatima",
+        "name": "Fatima Qureshi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-huda",
+        "name": "Huda Al-Sabri",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-ibrahim",
+        "name": "Ibrahim Kaya",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-idris",
+        "name": "Idris Baksh",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-leila",
+        "name": "Leila Karimi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-mariam",
+        "name": "Mariam Jaffer",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nadia",
+        "name": "Nadia Hassan",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nura",
+        "name": "Nura Rivera",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-omar",
+        "name": "Omar Diallo",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-sana",
+        "name": "Sana Abdullah",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yasmin",
+        "name": "Yasmin Berisha",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yusuf",
+        "name": "Yusuf El-Amin",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-zahra",
+        "name": "Zahra Chen",
+        "group": "muslim"
+      }
+    ],
+    "controversialPerCommunity": 3,
+    "controversialAgentIds": [
+      "muslim-ibrahim",
+      "muslim-zahra",
+      "muslim-mariam",
+      "jewish-daniel",
+      "jewish-rafael",
+      "jewish-sofia"
+    ],
+    "provider": "codex",
+    "model": "gpt-5.3-codex-spark",
+    "reasoningEffort": "medium",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_4be46b768bbf",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 1,
+        "topic": "Roots and Resonances: Sharing Our Multi-Generational Narratives",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T07:36:43.237Z",
+        "jobId": "job_4752ceeae1eb",
+        "runId": "run_9d104ad8a970"
+      },
+      {
+        "id": "session_f816667fde5b",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 2,
+        "topic": "The Rhythms of Home: Rituals and Practices That Anchor Us",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T08:39:25.933Z",
+        "jobId": "job_ffc24bb91940",
+        "runId": "run_a63fbc0aa692"
+      },
+      {
+        "id": "session_d7e93a2bf957",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 3,
+        "topic": "The Weight of the Web: Navigating Stereotypes and Digital Hate",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T09:50:35.253Z",
+        "jobId": "job_4b4b5f4b2d5c",
+        "runId": "run_edc914b97d86"
+      },
+      {
+        "id": "session_3dceebdb70d7",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 4,
+        "topic": "Holding Space in Friction: Staying Rooted in the Personal",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T10:49:14.903Z",
+        "jobId": "job_88441c3ca70b",
+        "runId": "run_f6362b5c0b63"
+      },
+      {
+        "id": "session_720af8318411",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 5,
+        "topic": "Reflections and Common Ground: Cultivating Authentic Empathy",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "failed",
+        "statusReason": "No hard-safe, LLM-accepted response was available for Ari Feldman.",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T16:34:27.350Z",
+        "jobId": "job_6a020120313f",
+        "runId": "run_e5c567aa132c"
+      },
+      {
+        "id": "session_af1f9f937152",
+        "projectId": "project_ad7abfeb42ef",
+        "number": 6,
+        "topic": "Building the Bridge: Co-Creating Campaigns for Digital Peace",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "failed",
+        "statusReason": "No hard-safe, LLM-accepted response was available for Ari Feldman.",
+        "createdAt": "2026-07-25T06:38:06.610Z",
+        "updatedAt": "2026-07-25T11:45:04.434Z",
+        "jobId": "job_cc35370f7099",
+        "runId": "run_6cb100f17835"
+      }
+    ]
+  },
+  {
+    "id": "project_f4a3eba09ff5",
+    "name": "Projects for Peace - NYC",
+    "projectIntroduction": "Over the course of this initiative, we will gather for six structured sessions. Our overarching goal is to bridge the divides that often feel insurmountable in our current climate. By moving step-by-step through a shared dialogue process, we will explore our unique histories, navigate the friction of online stereotypes, and come closer together. Ultimately, our work across these six sessions will culminate in co-creating a collaborative digital peace campaign to share with our wider community.",
+    "createdAt": "2026-07-25T19:49:43.937Z",
+    "updatedAt": "2026-07-26T06:35:41.179Z",
+    "status": "completed",
+    "sessionCount": 6,
+    "attendeeIds": [
+      "jewish-ari",
+      "jewish-daniel",
+      "jewish-david",
+      "jewish-eliana",
+      "jewish-gabriel",
+      "jewish-hannah",
+      "jewish-liora",
+      "jewish-maya",
+      "jewish-miriam",
+      "jewish-naomi",
+      "jewish-rafael",
+      "jewish-rivka",
+      "jewish-sofia",
+      "jewish-tamar",
+      "jewish-yael",
+      "muslim-amina",
+      "muslim-bilal",
+      "muslim-fatima",
+      "muslim-huda",
+      "muslim-ibrahim",
+      "muslim-idris",
+      "muslim-leila",
+      "muslim-mariam",
+      "muslim-nadia",
+      "muslim-nura",
+      "muslim-omar",
+      "muslim-sana",
+      "muslim-yasmin",
+      "muslim-yusuf",
+      "muslim-zahra"
+    ],
+    "attendees": [
+      {
+        "id": "jewish-ari",
+        "name": "Ari Feldman",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-daniel",
+        "name": "Daniel Behar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-david",
+        "name": "David Cohen",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-eliana",
+        "name": "Eliana Tesfaye",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-gabriel",
+        "name": "Gabriel Santana",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-hannah",
+        "name": "Hannah Stern",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-liora",
+        "name": "Liora Namdar",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-maya",
+        "name": "Maya Samuel",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-miriam",
+        "name": "Miriam Kaplan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-naomi",
+        "name": "Naomi Brooks",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rafael",
+        "name": "Rafael Davydov",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-rivka",
+        "name": "Rivka Levithan",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-sofia",
+        "name": "Sofia Abramovich",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-tamar",
+        "name": "Tamar Mizrahi",
+        "group": "jewish"
+      },
+      {
+        "id": "jewish-yael",
+        "name": "Yael Rosen",
+        "group": "jewish"
+      },
+      {
+        "id": "muslim-amina",
+        "name": "Amina Rahman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-bilal",
+        "name": "Bilal Osman",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-fatima",
+        "name": "Fatima Qureshi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-huda",
+        "name": "Huda Al-Sabri",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-ibrahim",
+        "name": "Ibrahim Kaya",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-idris",
+        "name": "Idris Baksh",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-leila",
+        "name": "Leila Karimi",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-mariam",
+        "name": "Mariam Jaffer",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nadia",
+        "name": "Nadia Hassan",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-nura",
+        "name": "Nura Rivera",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-omar",
+        "name": "Omar Diallo",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-sana",
+        "name": "Sana Abdullah",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yasmin",
+        "name": "Yasmin Berisha",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-yusuf",
+        "name": "Yusuf El-Amin",
+        "group": "muslim"
+      },
+      {
+        "id": "muslim-zahra",
+        "name": "Zahra Chen",
+        "group": "muslim"
+      }
+    ],
+    "controversialPerCommunity": 3,
+    "controversialAgentIds": [
+      "muslim-idris",
+      "muslim-amina",
+      "muslim-fatima",
+      "jewish-hannah",
+      "jewish-sofia",
+      "jewish-rivka"
+    ],
+    "provider": "codex",
+    "model": "gpt-5.5",
+    "reasoningEffort": "low",
+    "selection": "round-robin",
+    "budgetUsd": 2,
+    "mock": false,
+    "sessions": [
+      {
+        "id": "session_e0d31108d2d7",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 1,
+        "topic": "The Shared Experience of Diaspora and Resilience: Exploring the parallels in our families' migration stories, the historical challenges our ancestors overcame, and how the journeys that brought our families to New York City shape who we are today.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": true,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-25T20:54:16.547Z",
+        "jobId": "job_610c651f5d48",
+        "runId": "run_078210e23a2e"
+      },
+      {
+        "id": "session_fdac9142f9f7",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 2,
+        "topic": "Parallels in Practice, Faith, and Family: Uncovering the similarities in our daily and seasonal rituals—such as the importance of communal prayer, the discipline of fasting, and the sacredness of weekly family meals—and how these traditions anchor our respective values.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-26T00:43:02.979Z",
+        "jobId": "job_9d2e9b9c55d3",
+        "runId": "run_07da72308534"
+      },
+      {
+        "id": "session_96ef5444e724",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 3,
+        "topic": "Standing Together Against Online Hate: Analyzing the shared psychological impact of online Islamophobia and antisemitism, recognizing how algorithms push polarizing narratives, and developing joint strategies to protect our mental health and digital spaces.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-26T05:00:37.313Z",
+        "jobId": "job_6d7ab14ae00a",
+        "runId": "run_3d1053575af7"
+      },
+      {
+        "id": "session_6c79d6444917",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 4,
+        "topic": "De-escalating Tensions and Protecting Relationships: Applying active listening and mediation techniques when conversations touch on deeply personal or sensitive community issues, learning how to pause and understand rather than reacting with fight or flight.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-25T22:46:30.146Z",
+        "jobId": "job_c62f4ac826d2",
+        "runId": "run_c10872f5ec65"
+      },
+      {
+        "id": "session_1cbd19238849",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 5,
+        "topic": "Bridging the Gap Through Shared Hopes: Identifying our overlapping struggles as minority communities, dismantling mutual stereotypes, and reflecting on how our shared desire for a safe, inclusive future can fundamentally shift our perspectives of one another.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-25T23:44:16.839Z",
+        "jobId": "job_b963fe940b21",
+        "runId": "run_0b4ba6827cdd"
+      },
+      {
+        "id": "session_1498173d466c",
+        "projectId": "project_f4a3eba09ff5",
+        "number": 6,
+        "topic": "Building Solidarity Through Joint Action: Designing a collaborative, youth-ledcommunity initiative—such as a joint campaign against religious prejudice or ashared digital literacy workshop—by mapping out the unique strengths of bothgroups and taking concrete steps to build lasting solidarity.",
+        "rounds": 2,
+        "mandatoryIntroductionRound": false,
+        "status": "completed",
+        "statusReason": "",
+        "createdAt": "2026-07-25T19:49:43.937Z",
+        "updatedAt": "2026-07-26T06:35:41.179Z",
+        "jobId": "job_a81e483ea2ca",
+        "runId": "run_ea5c0a16ebdd"
+      }
+    ]
+  }
+]

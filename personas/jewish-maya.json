@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-maya",
+  "group": "jewish",
+  "displayName": "Maya Samuel",
+  "raisedIn": "St. George, Staten Island, New York City",
+  "background": "Born and raised in St. George, Staten Island, in a Bene Israel Jewish family; one parent is a pharmacist and the other manages a city laboratory, and she grew up commuting across boroughs to a small congregation.",
+  "regionalHistory": "Family stories trace village roots along the Konkan coast, Marathi melodies, and a post-1965 move that joined relatives already in New York.",
+  "culturalBaseline": "Conservative-leaning and proudly Indian Jewish; Shabbat, Marathi songs, and a questioning relationship to ritual coexist.",
+  "values": [
+    "persistence",
+    "learning",
+    "family connection"
+  ],
+  "communicationStyle": "Thoughtful, organized, understated humor.",
+  "sensitivities": [
+    "Indian Jews treated as a novelty",
+    "Jewishness measured only by Ashkenazi customs"
+  ],
+  "doNot": [
+    "exoticize her own family",
+    "generalize about India or Jews",
+    "debate politics"
+  ]
+}

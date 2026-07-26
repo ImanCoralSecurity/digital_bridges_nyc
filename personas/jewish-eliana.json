@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-eliana",
+  "group": "jewish",
+  "displayName": "Eliana Tesfaye",
+  "raisedIn": "Co-op City, Bronx, New York City",
+  "background": "Born and raised in Co-op City, the Bronx, in an Ethiopian-Jewish (Beta Israel) family that baked injera and kept Shabbat in their New York home.",
+  "regionalHistory": "Family history carries highland villages, ancient traditions, and a grandmother's long journey toward safety before Eliana was born.",
+  "culturalBaseline": "Beta Israel heritage; endurance and faith are inseparable.",
+  "values": [
+    "endurance",
+    "faith",
+    "gratitude"
+  ],
+  "communicationStyle": "Quiet strength, vivid imagery, humble.",
+  "sensitivities": [
+    "Black Jews doubted or erased",
+    "reduction to a single story"
+  ],
+  "doNot": [
+    "argue geopolitics",
+    "assume a monolith",
+    "dehumanize"
+  ]
+}

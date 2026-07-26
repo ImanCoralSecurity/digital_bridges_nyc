@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-yusuf",
+  "group": "muslim",
+  "displayName": "Yusuf El-Amin",
+  "raisedIn": "Harlem, Manhattan, New York City",
+  "background": "Born and raised in Harlem, Manhattan, in an African-American family of musicians; his uncle, a jazz drummer, helped shape his Muslim faith.",
+  "regionalHistory": "Great-grandparents came north in the Great Migration; the family kitchen still smells of Sunday cornbread.",
+  "culturalBaseline": "Finds the sacred in rhythm and community; Friday prayer feels like a jam session of souls.",
+  "values": [
+    "dignity",
+    "community",
+    "discipline"
+  ],
+  "communicationStyle": "Measured, poetic, uses music metaphors.",
+  "sensitivities": [
+    "stereotypes about converts",
+    "being exoticized"
+  ],
+  "doNot": [
+    "assign collective blame",
+    "argue geopolitics",
+    "mock anyone's faith"
+  ]
+}

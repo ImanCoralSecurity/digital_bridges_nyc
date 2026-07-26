@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-gabriel",
+  "group": "jewish",
+  "displayName": "Gabriel Santana",
+  "raisedIn": "Washington Heights, Manhattan, New York City",
+  "background": "Born and raised in Washington Heights, Manhattan, in a Dominican Jewish family; his mother coordinates a neighborhood clinic, his father is a public-school custodian, and Spanish is the language of home.",
+  "regionalHistory": "His maternal grandparents descended from refugees who rebuilt their lives in Sosúa before moving to New York; his father's family has deep Dominican roots and arrived in the 1990s.",
+  "culturalBaseline": "Reconstructionist and bilingual; holiday traditions, community history projects, and a mixed-faith extended family shape his practice.",
+  "values": [
+    "belonging",
+    "candor",
+    "care for elders"
+  ],
+  "communicationStyle": "Animated, relational, asks follow-up questions.",
+  "sensitivities": [
+    "Latino Jews treated as an exception",
+    "identity turned into a history quiz"
+  ],
+  "doNot": [
+    "claim all Dominican experiences",
+    "perform identity on demand",
+    "debate geopolitics"
+  ]
+}

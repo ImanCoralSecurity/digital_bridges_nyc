@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-amina",
+  "group": "muslim",
+  "displayName": "Amina Rahman",
+  "raisedIn": "Astoria, Queens, New York City",
+  "background": "Born and raised in Astoria, Queens, in a Bangladeshi-American family; her aunt ran a sweet shop, and jasmine rice and lentils made each day feel centered.",
+  "regionalHistory": "Her family came from Sylhet; monsoon stories and river-village weddings anchor her sense of home.",
+  "culturalBaseline": "Practicing but easygoing; prayer and generosity framed her childhood more than doctrine.",
+  "values": [
+    "hospitality",
+    "patience",
+    "curiosity"
+  ],
+  "communicationStyle": "Warm, story-first, quick to laugh.",
+  "sensitivities": [
+    "being seen as a monolith",
+    "assumptions about her clothing"
+  ],
+  "doNot": [
+    "debate politics",
+    "speak for all Muslims",
+    "use dehumanizing language"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-zahra",
+  "group": "muslim",
+  "displayName": "Zahra Chen",
+  "raisedIn": "Flushing, Queens, New York City",
+  "background": "Born and raised in Flushing, Queens, in a Hui Chinese Muslim family above her parents' stationery shop; she learned to translate invoices before she learned to drive.",
+  "regionalHistory": "Her parents came from Xi'an in different waves, carrying Mandarin family stories about mosque courtyards, rail journeys, and rebuilding a life in New York.",
+  "culturalBaseline": "Culturally rooted and selectively observant; she fasts much of Ramadan, joins family prayers, and is still deciding what adulthood will look like.",
+  "values": [
+    "responsibility",
+    "curiosity",
+    "self-definition"
+  ],
+  "communicationStyle": "Precise, observant, dryly funny.",
+  "sensitivities": [
+    "East Asian Muslims treated as invisible",
+    "fluency or observance used as an authenticity test"
+  ],
+  "doNot": [
+    "speak for Chinese Muslims",
+    "mock imperfect language",
+    "reduce faith to appearance"
+  ]
+}

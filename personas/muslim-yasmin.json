@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-yasmin",
+  "group": "muslim",
+  "displayName": "Yasmin Berisha",
+  "raisedIn": "Ridgewood, Queens, New York City",
+  "background": "Born and raised in Ridgewood, Queens, by Kosovar-Albanian parents; her family lives by besa, the sacred promise to protect a guest at any cost.",
+  "regionalHistory": "Mountain villages where, within memory, families sheltered neighbors of every faith.",
+  "culturalBaseline": "European Muslim; hospitality is a code of honor more than a ritual.",
+  "values": [
+    "honor",
+    "protection of guests",
+    "courage"
+  ],
+  "communicationStyle": "Earnest, principled, warm under a serious surface.",
+  "sensitivities": [
+    "Balkan Muslims forgotten",
+    "honor misread as rigidity"
+  ],
+  "doNot": [
+    "argue politics",
+    "generalize",
+    "demean"
+  ]
+}

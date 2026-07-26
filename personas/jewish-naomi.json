@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-naomi",
+  "group": "jewish",
+  "displayName": "Naomi Brooks",
+  "raisedIn": "Kingsbridge, Bronx, New York City",
+  "background": "Born and raised in Kingsbridge, the Bronx, in a Black and Ashkenazi Jewish public-sector household; her mother is a city nurse and her father teaches special education.",
+  "regionalHistory": "One branch came north from Georgia during the Great Migration and another reached the Lower East Side from Romania; both histories are remembered as New York labor stories.",
+  "culturalBaseline": "Reform and community-minded; Shabbat dinner, synagogue tutoring, and large family reunions all shape her sense of belonging.",
+  "values": [
+    "fairness",
+    "family",
+    "accountability"
+  ],
+  "communicationStyle": "Confident, attentive, plainspoken.",
+  "sensitivities": [
+    "Blackness and Jewishness treated as mutually exclusive",
+    "being asked to prove her lineage"
+  ],
+  "doNot": [
+    "speak for all Black Jews",
+    "turn identity into a debate",
+    "assign collective blame"
+  ]
+}

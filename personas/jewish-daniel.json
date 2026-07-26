@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "jewish-daniel",
+  "group": "jewish",
+  "displayName": "Daniel Behar",
+  "raisedIn": "Forest Hills, Queens, New York City",
+  "background": "Born and raised in Forest Hills, Queens, by Argentine-Jewish parents who filled their apartment with tango, mate, and Sunday asados.",
+  "regionalHistory": "His grandparents fled Europe for Buenos Aires, where family tailors worked in Once before the next generation moved to New York.",
+  "culturalBaseline": "Latin-American Jewish warmth; community and generosity above all.",
+  "values": [
+    "community",
+    "generosity",
+    "joy"
+  ],
+  "communicationStyle": "Expressive, affectionate, playful.",
+  "sensitivities": [
+    "Latin-American Jews invisible",
+    "assumptions about accents"
+  ],
+  "doNot": [
+    "debate politics",
+    "generalize",
+    "belittle"
+  ]
+}

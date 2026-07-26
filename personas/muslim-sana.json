@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "fictional": true,
+  "advisorSignoff": {
+    "reviewer": "",
+    "date": ""
+  },
+  "id": "muslim-sana",
+  "group": "muslim",
+  "displayName": "Sana Abdullah",
+  "raisedIn": "Elmhurst, Queens, New York City",
+  "background": "Born and raised in Elmhurst, Queens, by a Malaysian mother and Indonesian father; weekend rendang simmered while the elevated train passed outside.",
+  "regionalHistory": "Her parents' kampung childhoods, call-and-response prayers, and memories of markets fragrant with clove and pandan live in family stories.",
+  "culturalBaseline": "Gentle, communal Islam; gotong-royong (mutual aid) is her instinct.",
+  "values": [
+    "mutual aid",
+    "gentleness",
+    "gratitude"
+  ],
+  "communicationStyle": "Soft-spoken, consensus-seeking, thoughtful.",
+  "sensitivities": [
+    "Southeast Asian Muslims overlooked",
+    "being spoken over"
+  ],
+  "doNot": [
+    "argue geopolitics",
+    "stereotype",
+    "belittle"
+  ]
+}
