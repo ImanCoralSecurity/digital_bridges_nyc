@@ -567,6 +567,8 @@ export interface PublicPersonaSnapshot {
 
 /** Safe accepted-turn fields captured for one explicit public release. */
 export interface PublicTurnSnapshot {
+  /** Added in public snapshot schema 2; schema 1 records fall back to index anchors. */
+  id?: string;
   index: number;
   role: TurnRole;
   speakerName: string;
@@ -574,6 +576,19 @@ export interface PublicTurnSnapshot {
   text: string;
   roundNumber?: number;
   roundKind?: RoundKind;
+  conversationTag?: ConversationTag;
+  controversialSpeaker?: boolean;
+  compliant?: boolean;
+  guardrailTrigger?: boolean;
+  regenerations?: number;
+  generationSource?: "provider" | "mock" | "local" | "local-fallback";
+  flags?: string[];
+  signals?: TurnSignals;
+  respondsToTurnId?: string;
+  triggeredByTurnId?: string;
+  invitedSpeakerId?: string;
+  invitedByTurnId?: string;
+  consumedScheduledRoundNumber?: number;
 }
 
 export interface PublicSessionSnapshot {
@@ -586,7 +601,7 @@ export interface PublicSessionSnapshot {
 
 /** Frozen allowlisted release; operator records remain in their private stores. */
 export interface ProjectPublicationSnapshot {
-  schemaVersion: 1;
+  schemaVersion: 1 | 2;
   projectId: string;
   name: string;
   introduction: string;

@@ -222,6 +222,7 @@ function buildProjectPublication(
         topic: run.config.scenario,
         rounds: run.config.rounds,
         turns: turns.map((turn) => ({
+          id: turn.id,
           index: turn.index,
           role: turn.role,
           speakerName: turn.speakerName,
@@ -229,6 +230,23 @@ function buildProjectPublication(
           text: turn.text,
           roundNumber: turn.roundNumber,
           roundKind: turn.roundKind,
+          conversationTag: turn.conversationTag,
+          controversialSpeaker: turn.controversialSpeaker === true,
+          compliant: turn.compliant !== false,
+          guardrailTrigger: turn.guardrailTrigger === true,
+          regenerations: turn.regenerations ?? 0,
+          generationSource: turn.generationSource,
+          flags: (turn.flags ?? []).map((flag) => flag.code),
+          signals: {
+            iStatement: turn.signals?.iStatement === true,
+            personalHistory: turn.signals?.personalHistory === true,
+            curiosityQuestion: turn.signals?.curiosityQuestion === true,
+          },
+          respondsToTurnId: turn.respondsToTurnId,
+          triggeredByTurnId: turn.triggeredByTurnId,
+          invitedSpeakerId: turn.invitedSpeakerId,
+          invitedByTurnId: turn.invitedByTurnId,
+          consumedScheduledRoundNumber: turn.consumedScheduledSlot?.roundNumber,
         })),
       }];
     });
@@ -258,7 +276,7 @@ function buildProjectPublication(
   });
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     projectId: project.id,
     name: project.name,
     introduction: project.projectIntroduction ?? "",

@@ -76,6 +76,7 @@ function toPublicPersona(persona: PublicPersonaSnapshot): PublicPersona {
 
 function toPublicTurn(turn: PublicTurnSnapshot): PublicTurn {
   return {
+    id: turn.id,
     index: turn.index,
     role: turn.role,
     speakerName: turn.speakerName,
@@ -83,6 +84,19 @@ function toPublicTurn(turn: PublicTurnSnapshot): PublicTurn {
     text: turn.text,
     roundNumber: turn.roundNumber,
     roundKind: turn.roundKind,
+    conversationTag: turn.conversationTag,
+    controversialSpeaker: turn.controversialSpeaker,
+    compliant: turn.compliant,
+    guardrailTrigger: turn.guardrailTrigger,
+    regenerations: turn.regenerations,
+    generationSource: turn.generationSource,
+    flags: turn.flags ? [...turn.flags] : undefined,
+    signals: turn.signals ? { ...turn.signals } : undefined,
+    respondsToTurnId: turn.respondsToTurnId,
+    triggeredByTurnId: turn.triggeredByTurnId,
+    invitedSpeakerId: turn.invitedSpeakerId,
+    invitedByTurnId: turn.invitedByTurnId,
+    consumedScheduledRoundNumber: turn.consumedScheduledRoundNumber,
   };
 }
 

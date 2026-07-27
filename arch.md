@@ -365,8 +365,10 @@ This is a shared workspace gate, not a user identity system.
 5. An unauthenticated `/` request redirects to `/public`; other operator pages redirect to `/login`,
    and every operator API receives JSON 401.
 6. Public pages use `lib/publicProjects.ts`, which returns only allowlisted project, fictional-persona,
-   and accepted-turn fields. It validates project publication plus completed Run ownership and never
-   returns jobs, models, budgets, prompts, costs, audit records, or persona safety instructions.
+   accepted-turn fields, and safe display annotations such as escalation/de-escalation, challenge,
+   intervention, regeneration/source, and methodology-signal labels. It validates project publication
+   plus completed Run ownership and never returns jobs, models, budgets, prompts, costs, audit records,
+   validation rationale, flag reasons, or persona safety instructions.
 
 There are no accounts, roles, server-side sessions, per-user permissions, or authenticated reviewer
 identities. Reviewer and publisher names are free-text request fields. Changing the password
@@ -411,7 +413,7 @@ erDiagram
 |---|---|
 | `Persona` | Versioned fictional identity, group, immutable student `raisedIn`, narrative and family/regional heritage, values, facilitator-only `degree` and `professionalBackground`, sensitivities, do-not rules, optional role instructions, advisor sign-off. |
 | `Project` | Name, user-authored `projectIntroduction`, optional `published`/`publishedAt` public-visibility state, `sessionCount`, immutable shared attendee IDs and display snapshot, `controversialPerCommunity`, one-time `controversialAgentIds`, shared provider/model/reasoning/order/budget/mock settings, status, and embedded session array. |
-| `ProjectPublicationSnapshot` | Frozen allowlist created by an explicit publish/update action: project title/introduction, safe fictional-student fields, and non-empty accepted turns from the latest completed owned Run for each included session. It contains no jobs, model/budget/cost data, audit prompts, validation metadata, or persona safety instructions. |
+| `ProjectPublicationSnapshot` | Frozen allowlist created by an explicit publish/update action: project title/introduction, safe fictional-student fields, and non-empty accepted turns from the latest completed owned Run for each included session. Schema 2 also freezes the safe turn labels and linkage needed to explain challenge and facilitator-intervention flow. It contains no jobs, model/budget/cost data, audit prompts, validation rationale, flag reasons, or persona safety instructions. |
 | `ProjectSession` | Stable ID plus parent project ID, one-based `number`, independently configured `topic` and `rounds`, `mandatoryIntroductionRound`, status/reason, optional latest `jobId`/`runId`, timestamps, and optional read-model `jobStatus` used to distinguish two kinds of paused session. |
 | `Job` | Persistent `project-session-run` work item with the eight-state control FSM, project/session snapshot and IDs, optional run/result/error, first/current start and control timestamps, claim and resume counts, promotion timestamp, and cumulative active `durationMs`. |
 | `Run` | Config including provider/model/reasoning and optional `projectId`, `projectSessionId`, `projectSessionNumber`, `jobId`, `controversialAgentIds`, `introductionRound`, and session-one project-introduction/credential snapshot; attendee display snapshot, persona version map, seven-state lifecycle, accumulated known agent cost and its availability flag, methodology version, optional metrics. |

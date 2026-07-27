@@ -197,6 +197,25 @@ test("public projection exposes only safe persona fields and completed owned tra
     speakerName: "Amina Rahman",
     speakerGroup: "muslim",
     text: "This visible response is safe public dialogue.",
+    roundNumber: 1,
+    roundKind: "discussion",
+    conversationTag: "escalating",
+    controversialSpeaker: true,
+    compliant: false,
+    guardrailTrigger: true,
+    regenerations: 2,
+    generationSource: "local-fallback",
+    flags: [{ code: "topic-drift", reason: "internal flag reason" }],
+    signals: {
+      iStatement: true,
+      personalHistory: false,
+      curiosityQuestion: true,
+    },
+    respondsToTurnId: "turn_private_target",
+    triggeredByTurnId: "turn_private_trigger",
+    invitedSpeakerId: "jewish-ari",
+    invitedByTurnId: "turn_private_invitation",
+    consumedScheduledSlot: { roundNumber: 1, speakerId: "muslim-amina" },
     promptHash: "must-not-be-public",
     semanticValidation: { verdict: "accept", rationale: "internal" },
     costUsd: 4.2,
@@ -206,6 +225,7 @@ test("public projection exposes only safe persona fields and completed owned tra
   const published = await setProjectPublication(projectId, true);
   assert.equal(published.published, true);
   assert.ok(published.publishedAt);
+  assert.equal(db.getProjectPublication(projectId)?.schemaVersion, 2);
 
   const summaries = listPublishedProjectSummaries();
   assert.equal(summaries.length, 1);
@@ -218,18 +238,31 @@ test("public projection exposes only safe persona fields and completed owned tra
   assert.equal(publicProject.sessions.length, 1);
   assert.equal(publicProject.sessions[0].id, completed.id);
   assert.equal(publicProject.sessions[0].turns.length, 1);
-  assert.deepEqual(Object.keys(publicProject.sessions[0].turns[0]).sort(), [
-    "index",
-    "role",
-    "roundKind",
-    "roundNumber",
-    "speakerGroup",
-    "speakerName",
-    "text",
-  ]);
-  assert.equal("promptHash" in publicProject.sessions[0].turns[0], false);
-  assert.equal("semanticValidation" in publicProject.sessions[0].turns[0], false);
-  assert.equal("costUsd" in publicProject.sessions[0].turns[0], false);
+  const publicTurn = publicProject.sessions[0].turns[0];
+  assert.equal(publicTurn.id, "turn_public");
+  assert.equal(publicTurn.conversationTag, "escalating");
+  assert.equal(publicTurn.controversialSpeaker, true);
+  assert.equal(publicTurn.compliant, false);
+  assert.equal(publicTurn.guardrailTrigger, true);
+  assert.equal(publicTurn.regenerations, 2);
+  assert.equal(publicTurn.generationSource, "local-fallback");
+  assert.deepEqual(publicTurn.flags, ["topic-drift"]);
+  assert.deepEqual(publicTurn.signals, {
+    iStatement: true,
+    personalHistory: false,
+    curiosityQuestion: true,
+  });
+  assert.equal(publicTurn.respondsToTurnId, "turn_private_target");
+  assert.equal(publicTurn.triggeredByTurnId, "turn_private_trigger");
+  assert.equal(publicTurn.invitedSpeakerId, "jewish-ari");
+  assert.equal(publicTurn.invitedByTurnId, "turn_private_invitation");
+  assert.equal(publicTurn.consumedScheduledRoundNumber, 1);
+  assert.equal("promptHash" in publicTurn, false);
+  assert.equal("semanticValidation" in publicTurn, false);
+  assert.equal("costUsd" in publicTurn, false);
+  assert.equal("tagReasons" in publicTurn, false);
+  assert.equal("interventionReason" in publicTurn, false);
+  assert.equal(publicTurn.flags.includes("internal flag reason"), false);
 
   assert.equal(publicProject.personas.length, 2);
   assert.deepEqual(Object.keys(publicProject.personas[0]).sort(), [
@@ -264,6 +297,61 @@ test("public projection exposes only safe persona fields and completed owned tra
   const updated = await setProjectPublication(projectId, true);
   assert.equal(updated.publishedAt, firstPublishedAt);
   assert.equal(getPublishedProject(projectId)?.sessions[0].turns.length, 2);
+});
+
+test("schema-1 public snapshots remain readable without invented annotations", async () => {
+  const projectId = "project_legacy_publication";
+  const publishedAt = "2026-07-27T10:06:00.000Z";
+  const legacyProject = {
+    ...project(projectId, [session(projectId, 1)]),
+    published: true,
+    publishedAt,
+  };
+  await db.insertProject(legacyProject);
+  await db.upsertProjectPublication({
+    schemaVersion: 1,
+    projectId,
+    name: legacyProject.name,
+    introduction: legacyProject.projectIntroduction,
+    publishedAt,
+    updatedAt: publishedAt,
+    sourceProjectUpdatedAt: legacyProject.updatedAt,
+    sourceSessionCount: 1,
+    personas: [],
+    sessions: [{
+      id: legacyProject.sessions[0].id,
+      number: 1,
+      topic: "Legacy session topic",
+      rounds: 2,
+      turns: [{
+        index: 0,
+        role: "facilitator",
+        speakerName: "Sam",
+        speakerGroup: "facilitator",
+        text: "A legacy public turn without schema-2 labels.",
+      }],
+    }],
+  });
+
+  const legacyPublicTurn = getPublishedProject(projectId)?.sessions[0].turns[0];
+  assert.ok(legacyPublicTurn);
+  assert.equal(legacyPublicTurn.conversationTag, undefined);
+  assert.equal(legacyPublicTurn.controversialSpeaker, undefined);
+  assert.equal(legacyPublicTurn.compliant, undefined);
+  assert.equal(legacyPublicTurn.guardrailTrigger, undefined);
+  assert.equal(legacyPublicTurn.regenerations, undefined);
+  assert.equal(legacyPublicTurn.generationSource, undefined);
+  assert.equal(legacyPublicTurn.flags, undefined);
+  assert.equal(legacyPublicTurn.signals, undefined);
+  assert.deepEqual(Object.keys(JSON.parse(JSON.stringify(legacyPublicTurn))).sort(), [
+    "index",
+    "role",
+    "speakerGroup",
+    "speakerName",
+    "text",
+  ]);
+
+  await setProjectPublication(projectId, false);
 });
 
 test("unpublishing removes public access immediately", async () => {

@@ -28,6 +28,9 @@ export default async function PublicProjectPage({ params }: PageProps) {
 
   const muslim = project.personas.filter((persona) => persona.group === "muslim").length;
   const jewish = project.personas.filter((persona) => persona.group === "jewish").length;
+  const personaNameById = new Map(
+    project.personas.map((persona) => [persona.id, persona.displayName]),
+  );
 
   return (
     <>
@@ -106,18 +109,40 @@ export default async function PublicProjectPage({ params }: PageProps) {
             <h2 id="sessions-heading">Sessions</h2>
             <p className="meta" style={{ margin: 0 }}>
               These completed transcripts were captured in the project&apos;s current public snapshot and are read only.
+              Labels show automated dialogue annotations and generation provenance within this fictional simulation.
             </p>
           </div>
         </div>
         {project.sessions.map((session) => (
-          <PublicSession key={session.id} session={session} />
+          <PublicSession
+            key={session.id}
+            session={session}
+            personaNameById={personaNameById}
+          />
         ))}
       </section>
     </>
   );
 }
 
-function PublicSession({ session }: { session: PublicProjectSession }) {
+function PublicSession({
+  session,
+  personaNameById,
+}: {
+  session: PublicProjectSession;
+  personaNameById: ReadonlyMap<string, string>;
+}) {
+  const turnId = (turn: PublicProjectSession["turns"][number]) =>
+    turn.id ?? `${session.id}-turn-${turn.index}`;
+  const availableTurnIds = new Set(
+    session.turns.map((turn) => turn.id).filter((id): id is string => Boolean(id)),
+  );
+  const invitedResponseByInterventionId = new Map(
+    session.turns
+      .filter((turn) => turn.invitedByTurnId)
+      .map((turn) => [turn.invitedByTurnId as string, turn]),
+  );
+
   return (
     <article id={session.id} className="card public-session">
       <div className="section-head compact">
@@ -141,20 +166,69 @@ function PublicSession({ session }: { session: PublicProjectSession }) {
                 ? "persona-a"
                 : "persona-b";
             return (
-              <div className={`turn ${turnClass}`} key={`${session.id}-${turn.index}`}>
+              <div
+                className={`turn ${turnClass}`}
+                id={turnId(turn)}
+                key={turnId(turn)}
+              >
                 <div className="turn-head">
                   <span className="turn-speaker">{turn.speakerName}</span>
                   <Badge kind={turn.role === "facilitator" ? "gray" : turn.speakerGroup}>
                     {turn.role === "facilitator" ? "Facilitator" : capitalize(turn.speakerGroup)}
                   </Badge>
-                  {turn.roundKind && (
-                    <span className="meta">
-                      {turn.roundNumber ? `Round ${turn.roundNumber} · ` : ""}
-                      {turn.roundKind.replaceAll("-", " ")}
-                    </span>
+                  {turn.roundNumber !== undefined && <Badge kind="gray">round {turn.roundNumber}</Badge>}
+                  {turn.roundKind && <Badge kind="gray">{turn.roundKind}</Badge>}
+                  {turn.controversialSpeaker && <Badge kind="amber">challenge voice</Badge>}
+                  {turn.conversationTag === "escalating" && <Badge kind="red">escalating</Badge>}
+                  {turn.conversationTag === "deescalating" && <Badge kind="green">de-escalating</Badge>}
+                  {turn.compliant === false && <Badge kind="red">flagged</Badge>}
+                  {turn.guardrailTrigger && <Badge kind="amber">guardrail</Badge>}
+                  {(turn.regenerations ?? 0) > 0 && (
+                    <Badge kind="gray">regenerated ×{turn.regenerations}</Badge>
+                  )}
+                  {turn.generationSource === "local-fallback" && (
+                    <Badge kind="amber">local fallback</Badge>
+                  )}
+                  {turn.generationSource === "local" && (
+                    <Badge kind="gray">local transition</Badge>
                   )}
                 </div>
                 <div className="turn-text"><InlineMarkdown text={turn.text} /></div>
+                {turn.respondsToTurnId && availableTurnIds.has(turn.respondsToTurnId) && (
+                  <div className="meta public-turn-link">
+                    Challenge grounded in <a href={`#${turn.respondsToTurnId}`}>this earlier student turn</a>.
+                  </div>
+                )}
+                {turn.triggeredByTurnId && availableTurnIds.has(turn.triggeredByTurnId) && (
+                  <div className="meta public-turn-link">
+                    Intervention for <a href={`#${turn.triggeredByTurnId}`}>the preceding escalating turn</a>.
+                  </div>
+                )}
+                {turn.invitedSpeakerId && (
+                  <div className="meta public-turn-link">
+                    Invited {invitedResponseByInterventionId.get(turnId(turn)) ? (
+                      <a href={`#${turnId(invitedResponseByInterventionId.get(turnId(turn))!)}`}>
+                        {personaNameById.get(turn.invitedSpeakerId) ?? turn.invitedSpeakerId}
+                      </a>
+                    ) : (
+                      personaNameById.get(turn.invitedSpeakerId) ?? turn.invitedSpeakerId
+                    )} to answer immediately before the schedule continues.
+                  </div>
+                )}
+                {turn.invitedByTurnId && availableTurnIds.has(turn.invitedByTurnId) && (
+                  <div className="meta public-turn-link">
+                    Response invited by <a href={`#${turn.invitedByTurnId}`}>this facilitator intervention</a>;
+                    {turn.consumedScheduledRoundNumber
+                      ? ` it also fulfilled the student’s scheduled contribution in go-round ${turn.consumedScheduledRoundNumber}.`
+                      : " the student’s scheduled go-round turn is unchanged."}
+                  </div>
+                )}
+                <div className="chips">
+                  {(turn.flags ?? []).map((flag) => <Badge key={flag} kind="red">{flag}</Badge>)}
+                  {turn.signals?.iStatement && <Badge kind="green">I-statement</Badge>}
+                  {turn.signals?.personalHistory && <Badge kind="green">personal history</Badge>}
+                  {turn.signals?.curiosityQuestion && <Badge kind="green">curiosity</Badge>}
+                </div>
               </div>
             );
           })}

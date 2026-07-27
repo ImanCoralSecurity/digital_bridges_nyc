@@ -415,6 +415,8 @@ pre.body {
 .public-transcript { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
 .public-transcript > summary { cursor: pointer; color: var(--primary); font-weight: 700; }
 .public-transcript-body { margin-top: 14px; }
+.public-transcript .turn { scroll-margin-top: 80px; }
+.public-turn-link { margin-top: 8px; }
 
 @media (max-width: 620px) {
   .topbar-inner { align-items: flex-start; flex-direction: column; gap: 10px; }

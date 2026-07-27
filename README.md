@@ -428,7 +428,8 @@ intentionally small so it can be swapped for SQLite/Postgres without changing ca
 contains `projects.json` (projects with embedded session shells), `jobs.json`, `runs.json`,
 `turns.json`, `generation_attempts.json`, `semantic_validation_attempts.json`, `assets.json`, and
 `publish_logs.json`. `project_publications.json` contains only frozen, allowlisted persona and
-accepted-transcript snapshots created by explicit project publication. Project creation
+accepted-transcript snapshots created by explicit project publication, including the safe dialogue
+labels shown beside public turns. Project creation
 and queue/session claims use process-local file mutexes; queue-to-project-to-run/turn/attempt
 transitions span multiple files and are not a database transaction. The queue is intentionally
 limited to one Node process and one worker. The store directory is forced to mode `0700`, and every
