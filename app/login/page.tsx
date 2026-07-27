@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -23,7 +24,12 @@ export default function Login() {
         const d = await res.json().catch(() => ({}));
         throw new Error((d as { error?: string }).error || "Login failed");
       }
-      const next = new URLSearchParams(window.location.search).get("next") || "/";
+      const requestedNext = new URLSearchParams(window.location.search).get("next");
+      const next = requestedNext?.startsWith("/") &&
+        !requestedNext.startsWith("//") &&
+        !requestedNext.includes("\\")
+        ? requestedNext
+        : "/";
       router.push(next);
       router.refresh();
     } catch (err) {
@@ -37,7 +43,7 @@ export default function Login() {
     <div style={{ maxWidth: 380, margin: "8vh auto 0" }}>
       <div className="card">
         <h1 style={{ fontSize: 22 }}>Digital Bridges NYC</h1>
-        <p className="subtitle">This workspace is password-protected. Enter the access password to continue.</p>
+        <p className="subtitle">Enter the administrator password to unlock project creation, editing, jobs, and review tools.</p>
         <form onSubmit={submit}>
           <label htmlFor="pw">Password</label>
           <input
@@ -54,6 +60,9 @@ export default function Login() {
             {busy ? "Verifying…" : "Unlock"}
           </button>
         </form>
+        <p className="meta" style={{ marginBottom: 0, textAlign: "center" }}>
+          <Link href="/public">Return to the public, read-only site</Link>
+        </p>
       </div>
     </div>
   );

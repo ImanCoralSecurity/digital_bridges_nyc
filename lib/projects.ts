@@ -1,7 +1,16 @@
 // Persistent project/session planning above the existing Run execution engine.
 
 import { getConfig } from "./config";
-import { getJob, insertProject, mutateProject } from "./db";
+import {
+  deleteProjectPublication,
+  getJob,
+  getProject,
+  insertProject,
+  listRuns,
+  listTurnsByRunIds,
+  mutateProject,
+  upsertProjectPublication,
+} from "./db";
 import { newId } from "./hash";
 import { startRun } from "./orchestrator";
 import {
@@ -23,6 +32,7 @@ import type {
   AgentProvider,
   Persona,
   Project,
+  ProjectPublicationSnapshot,
   ProjectSessionStatus,
   ReasoningEffort,
   Run,
@@ -130,6 +140,7 @@ export async function createProject(
     id,
     name,
     projectIntroduction,
+    published: false,
     createdAt: now,
     updatedAt: now,
     status: "planned",
@@ -151,6 +162,133 @@ export async function createProject(
     sessions: createSessionPlan(id, sessionCount, now),
   };
   return insertProject(project);
+}
+
+function buildProjectPublication(
+  project: Project,
+  publishedAt: string,
+  updatedAt: string,
+): ProjectPublicationSnapshot {
+  const sessionIds = new Set(project.sessions.map((session) => session.id));
+  const completedRuns = listRuns().filter(
+    (run) =>
+      run.status === "completed" &&
+      run.config.projectId === project.id &&
+      Boolean(run.config.projectSessionId && sessionIds.has(run.config.projectSessionId)),
+  );
+  const turnsByRun = new Map<string, ReturnType<typeof listTurnsByRunIds>>();
+  for (const turn of listTurnsByRunIds(completedRuns.map((run) => run.id))) {
+    const turns = turnsByRun.get(turn.runId) ?? [];
+    turns.push(turn);
+    turnsByRun.set(turn.runId, turns);
+  }
+
+  // listRuns() is newest-first. Keep the latest successful, non-empty run for
+  // each stable session and ignore failed/partial reruns completely.
+  const runBySession = new Map<string, Run>();
+  for (const run of completedRuns) {
+    const sessionId = run.config.projectSessionId;
+    if (!sessionId || runBySession.has(sessionId)) continue;
+    if (!(turnsByRun.get(run.id)?.length)) continue;
+    runBySession.set(sessionId, run);
+  }
+
+  const sessions = project.sessions
+    .slice()
+    .sort((a, b) => a.number - b.number)
+    .flatMap((session) => {
+      const run = runBySession.get(session.id);
+      if (!run) return [];
+      const turns = turnsByRun.get(run.id) ?? [];
+      return [{
+        id: session.id,
+        number: session.number,
+        topic: run.config.scenario,
+        rounds: run.config.rounds,
+        turns: turns.map((turn) => ({
+          index: turn.index,
+          role: turn.role,
+          speakerName: turn.speakerName,
+          speakerGroup: turn.speakerGroup,
+          text: turn.text,
+          roundNumber: turn.roundNumber,
+          roundKind: turn.roundKind,
+        })),
+      }];
+    });
+  if (!sessions.length) {
+    throw new Error(
+      "Complete at least one project session with an accepted transcript before publishing.",
+    );
+  }
+
+  const personas = project.attendeeIds.map((id) => {
+    const persona = getPersona(id);
+    if (persona.group !== "muslim" && persona.group !== "jewish") {
+      throw new Error(`Project attendee is not a student persona: ${id}`);
+    }
+    return {
+      id: persona.id,
+      displayName: persona.displayName,
+      group: persona.group,
+      fictional: true as const,
+      raisedIn: persona.raisedIn ?? "New York City",
+      background: persona.background,
+      regionalHistory: persona.regionalHistory,
+      culturalBaseline: persona.culturalBaseline,
+      values: [...persona.values],
+      communicationStyle: persona.communicationStyle,
+    };
+  });
+
+  return {
+    schemaVersion: 1,
+    projectId: project.id,
+    name: project.name,
+    introduction: project.projectIntroduction ?? "",
+    publishedAt,
+    updatedAt,
+    sourceProjectUpdatedAt: project.updatedAt,
+    sourceSessionCount: project.sessions.length,
+    personas,
+    sessions,
+  };
+}
+
+/** Publish/update a frozen safe snapshot, or remove it from public access. */
+export async function setProjectPublication(
+  projectId: string,
+  published: boolean,
+): Promise<Project> {
+  const project = getProject(projectId);
+  if (!project) throw new Error(`Project not found: ${projectId}`);
+
+  if (!published) {
+    const updated = project.published
+      ? await mutateProject(projectId, (current) => ({
+          ...current,
+          published: false,
+          publishedAt: undefined,
+        }))
+      : project;
+    await deleteProjectPublication(projectId);
+    return updated;
+  }
+
+  const updatedAt = new Date().toISOString();
+  const publishedAt = project.publishedAt ?? updatedAt;
+  const publication = buildProjectPublication(project, publishedAt, updatedAt);
+  await upsertProjectPublication(publication);
+  return mutateProject(projectId, (current) => {
+    if (current.id !== project.id) {
+      throw new Error("Project changed while its public snapshot was being prepared.");
+    }
+    return {
+      ...current,
+      published: true,
+      publishedAt,
+    };
+  });
 }
 
 export async function configureProjectSession(

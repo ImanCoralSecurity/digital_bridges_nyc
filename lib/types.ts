@@ -528,6 +528,10 @@ export interface Project {
   name: string;
   /** User-authored overview spoken by Sam only in project session 1. */
   projectIntroduction?: string;
+  /** Explicit operator-controlled visibility on the read-only public site. */
+  published?: boolean;
+  /** Most recent time this project was made public. */
+  publishedAt?: string;
   createdAt: string;
   updatedAt: string;
   status: ProjectStatus;
@@ -545,6 +549,53 @@ export interface Project {
   budgetUsd: number;
   mock: boolean;
   sessions: ProjectSession[];
+}
+
+/** Safe fictional-persona fields captured for one explicit public release. */
+export interface PublicPersonaSnapshot {
+  id: string;
+  displayName: string;
+  group: "muslim" | "jewish";
+  fictional: true;
+  raisedIn: string;
+  background: string;
+  regionalHistory: string;
+  culturalBaseline: string;
+  values: string[];
+  communicationStyle: string;
+}
+
+/** Safe accepted-turn fields captured for one explicit public release. */
+export interface PublicTurnSnapshot {
+  index: number;
+  role: TurnRole;
+  speakerName: string;
+  speakerGroup: PersonaGroup;
+  text: string;
+  roundNumber?: number;
+  roundKind?: RoundKind;
+}
+
+export interface PublicSessionSnapshot {
+  id: string;
+  number: number;
+  topic: string;
+  rounds: number;
+  turns: PublicTurnSnapshot[];
+}
+
+/** Frozen allowlisted release; operator records remain in their private stores. */
+export interface ProjectPublicationSnapshot {
+  schemaVersion: 1;
+  projectId: string;
+  name: string;
+  introduction: string;
+  publishedAt: string;
+  updatedAt: string;
+  sourceProjectUpdatedAt: string;
+  sourceSessionCount: number;
+  personas: PublicPersonaSnapshot[];
+  sessions: PublicSessionSnapshot[];
 }
 
 export type JobStatus =

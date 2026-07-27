@@ -139,6 +139,24 @@ function run(id, projectId, sessionId, jobId) {
 }
 
 test("project/session deletion preserves history and rejects active work", async (t) => {
+  await t.test("a published project must be unpublished before deletion", async () => {
+    const projectId = "project_delete_published";
+    const publishedProject = {
+      ...project(projectId, [session(projectId, 1), session(projectId, 2)]),
+      published: true,
+      publishedAt: "2026-07-20T00:00:00.000Z",
+    };
+    await db.insertProject(publishedProject);
+
+    await assert.rejects(
+      () => deleteProject(projectId),
+      (error) =>
+        error instanceof ProjectDeletionConflictError &&
+        /Unpublish it before deleting/i.test(error.message),
+    );
+    assert.ok(db.getProject(projectId));
+  });
+
   await t.test("session deletion keeps stable numbers and terminal job history", async () => {
     const projectId = "project_delete_middle";
     const secondJob = job(

@@ -1155,7 +1155,7 @@
     "name": "Projects for Peace - NYC",
     "projectIntroduction": "Over the course of this initiative, we will gather for six structured sessions. Our overarching goal is to bridge the divides that often feel insurmountable in our current climate. By moving step-by-step through a shared dialogue process, we will explore our unique histories, navigate the friction of online stereotypes, and come closer together. Ultimately, our work across these six sessions will culminate in co-creating a collaborative digital peace campaign to share with our wider community.",
     "createdAt": "2026-07-25T19:49:43.937Z",
-    "updatedAt": "2026-07-26T06:35:41.179Z",
+    "updatedAt": "2026-07-27T00:26:18.292Z",
     "status": "completed",
     "sessionCount": 6,
     "attendeeIds": [
@@ -1442,6 +1442,8 @@
         "jobId": "job_a81e483ea2ca",
         "runId": "run_ea5c0a16ebdd"
       }
-    ]
+    ],
+    "published": true,
+    "publishedAt": "2026-07-27T00:26:18.062Z"
   }
 ]

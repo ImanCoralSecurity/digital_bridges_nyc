@@ -64,6 +64,7 @@ export default function ProjectWorkspace() {
   const [project, setProject] = useState<Project | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [publishingProject, setPublishingProject] = useState(false);
   const [deletingProject, setDeletingProject] = useState(false);
   const [deletingSessionId, setDeletingSessionId] = useState<string | null>(null);
 
@@ -110,6 +111,10 @@ export default function ProjectWorkspace() {
 
   async function removeProject() {
     if (!project) return;
+    if (project.published) {
+      setError("Unpublish this project before removing it from the workspace.");
+      return;
+    }
     const confirmed = window.confirm(
       `Remove project “${project.name}” and its remaining session plans? ` +
         "Historical runs and transcripts are preserved and remain accessible. " +
@@ -175,6 +180,41 @@ export default function ProjectWorkspace() {
     }
   }
 
+  async function setPublication(nextPublished: boolean) {
+    if (!project) return;
+    const updating = nextPublished && project.published;
+    const confirmed = window.confirm(
+      updating
+        ? `Update the public page for “${project.name}”? This replaces its public snapshot with the current persona profiles and latest successfully completed transcripts.`
+        : nextPublished
+        ? `Publish “${project.name}” for anyone to view? Its persona profiles and completed session transcripts will be public and read only.`
+        : `Unpublish “${project.name}”? Its public link will stop working immediately.`,
+    );
+    if (!confirmed) return;
+
+    setPublishingProject(true);
+    setError("");
+    setNotice("");
+    try {
+      const updated = await fetchJson<Project>(`/api/projects/${project.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ published: nextPublished }),
+      });
+      setProject(updated);
+      setNotice(
+        updating
+          ? "Public page updated with the current persona profiles and latest successfully completed transcripts."
+          : nextPublished
+          ? "Project published. Its public page now shows the persona profiles and completed session transcripts."
+          : "Project unpublished. Its public page is no longer accessible.",
+      );
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : String(caught));
+    } finally {
+      setPublishingProject(false);
+    }
+  }
+
   if (error && !project) return <div className="banner err">{error}</div>;
   if (!project) return <p className="meta">Loading project…</p>;
 
@@ -182,6 +222,7 @@ export default function ProjectWorkspace() {
   const jewish = project.attendees.filter((attendee) => attendee.group === "jewish");
   const challengeIds = new Set(project.controversialAgentIds);
   const completed = project.sessions.filter((session) => session.status === "completed").length;
+  const hasRecordedRun = project.sessions.some((session) => Boolean(session.runId));
   const maxRounds = maxRoundsForRoster(project.attendeeIds.length);
 
   return (
@@ -192,6 +233,7 @@ export default function ProjectWorkspace() {
           <h1>{project.name}</h1>
           <div className="inline" style={{ marginTop: 7 }}>
             <Badge kind={projectStatusKind(project.status)}>{project.status}</Badge>
+            {project.published && <Badge kind="green">published</Badge>}
             <Badge kind="gray">{project.provider}</Badge>
             <Badge kind="gray">{project.model}</Badge>
             {project.reasoningEffort && <Badge kind="gray">{project.reasoningEffort} reasoning</Badge>}
@@ -200,19 +242,84 @@ export default function ProjectWorkspace() {
           </div>
           <p className="meta mono" style={{ marginBottom: 0 }}>{project.id}</p>
         </div>
-        <button
-          type="button"
-          className="danger"
-          disabled={deletingProject || deletingSessionId !== null}
-          aria-label={`Remove project ${project.name}`}
-          onClick={() => void removeProject()}
-        >
-          {deletingProject ? "Removing project…" : "Remove project"}
-        </button>
+        <div className="inline">
+          {project.published && (
+            <Link
+              href={`/public/projects/${project.id}`}
+              className="button-link secondary-link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View public page ↗
+            </Link>
+          )}
+          {project.published ? (
+            <>
+              <button
+                type="button"
+                disabled={publishingProject || deletingProject || deletingSessionId !== null}
+                onClick={() => void setPublication(true)}
+              >
+                {publishingProject ? "Updating publication…" : "Update public page"}
+              </button>
+              <button
+                type="button"
+                className="secondary"
+                disabled={publishingProject || deletingProject || deletingSessionId !== null}
+                onClick={() => void setPublication(false)}
+              >
+                Unpublish
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              disabled={
+                publishingProject ||
+                deletingProject ||
+                deletingSessionId !== null ||
+                !hasRecordedRun
+              }
+              title={!hasRecordedRun ? "Complete at least one session before publishing." : undefined}
+              onClick={() => void setPublication(true)}
+            >
+              {publishingProject ? "Publishing…" : "Publish project"}
+            </button>
+          )}
+          <button
+            type="button"
+            className="danger"
+            disabled={
+              deletingProject ||
+              deletingSessionId !== null ||
+              publishingProject ||
+              project.published
+            }
+            title={project.published ? "Unpublish this project before removing it." : undefined}
+            aria-label={`Remove project ${project.name}`}
+            onClick={() => void removeProject()}
+          >
+            {deletingProject ? "Removing project…" : "Remove project"}
+          </button>
+        </div>
       </div>
 
       {error && <div className="banner err">{error}</div>}
       {notice && <div className="banner info" aria-live="polite">{notice}</div>}
+
+      <div className={`banner ${project.published ? "info" : "warn"}`}>
+        {project.published ? (
+          <>
+            This project is public and read only. It is a frozen snapshot: workspace edits and
+            reruns stay private until you choose Update public page. {" "}
+            <Link href={`/public/projects/${project.id}`}>Open the public page →</Link>
+          </>
+        ) : hasRecordedRun ? (
+          "This project is private. Publish it when its personas and completed transcripts are ready for public viewing."
+        ) : (
+          "This project is private. Complete at least one session before publishing it."
+        )}
+      </div>
 
       <div className="grid grid-3">
         <Tile label="Sessions complete" value={`${completed} / ${project.sessionCount}`} />

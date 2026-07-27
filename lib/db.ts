@@ -20,6 +20,7 @@ import type {
   GenerationAttempt,
   Job,
   Project,
+  ProjectPublicationSnapshot,
   PublishLog,
   Run,
   SemanticValidationAttempt,
@@ -33,6 +34,7 @@ const STORE_DIR = process.env.DBRIDGES_STORE_DIR
 const FILES = {
   runs: join(STORE_DIR, "runs.json"),
   projects: join(STORE_DIR, "projects.json"),
+  projectPublications: join(STORE_DIR, "project_publications.json"),
   turns: join(STORE_DIR, "turns.json"),
   generationAttempts: join(STORE_DIR, "generation_attempts.json"),
   semanticValidationAttempts: join(STORE_DIR, "semantic_validation_attempts.json"),
@@ -120,6 +122,7 @@ const existingLocks = globalForDb.__digitalBridgesDbLocks;
 const locks: CollectionLocks = {
   runs: existingLocks?.runs ?? new Mutex(),
   projects: existingLocks?.projects ?? new Mutex(),
+  projectPublications: existingLocks?.projectPublications ?? new Mutex(),
   turns: existingLocks?.turns ?? new Mutex(),
   generationAttempts: existingLocks?.generationAttempts ?? new Mutex(),
   // A development hot reload can retain a lock map created before a new
@@ -331,6 +334,57 @@ export function mutateProject(
   });
 }
 
+// --- public project publication snapshots ---------------------------------
+
+export function getProjectPublication(
+  projectId: string,
+): ProjectPublicationSnapshot | undefined {
+  return readAll<ProjectPublicationSnapshot>(
+    FILES.projectPublications,
+    "project-publication",
+  ).find((publication) => publication.projectId === projectId);
+}
+
+export function listProjectPublications(): ProjectPublicationSnapshot[] {
+  return readAll<ProjectPublicationSnapshot>(
+    FILES.projectPublications,
+    "project-publication",
+  ).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
+export function upsertProjectPublication(
+  publication: ProjectPublicationSnapshot,
+): Promise<ProjectPublicationSnapshot> {
+  return locks.projectPublications.run(() => {
+    const publications = readAll<ProjectPublicationSnapshot>(
+      FILES.projectPublications,
+      "project-publication",
+    );
+    const index = publications.findIndex(
+      (item) => item.projectId === publication.projectId,
+    );
+    if (index === -1) publications.push(publication);
+    else publications[index] = publication;
+    writeAll(FILES.projectPublications, publications);
+    return publication;
+  });
+}
+
+export function deleteProjectPublication(projectId: string): Promise<boolean> {
+  return locks.projectPublications.run(() => {
+    const publications = readAll<ProjectPublicationSnapshot>(
+      FILES.projectPublications,
+      "project-publication",
+    );
+    const remaining = publications.filter(
+      (publication) => publication.projectId !== projectId,
+    );
+    if (remaining.length === publications.length) return false;
+    writeAll(FILES.projectPublications, remaining);
+    return true;
+  });
+}
+
 // --- turns -----------------------------------------------------------------
 
 export function insertTurn(turn: Turn): Promise<Turn> {
@@ -346,6 +400,15 @@ export function listTurnsByRun(runId: string): Turn[] {
   return readAll<Turn>(FILES.turns)
     .filter((t) => t.runId === runId)
     .sort((a, b) => a.index - b.index);
+}
+
+/** Read the turn store once when rendering several completed project sessions. */
+export function listTurnsByRunIds(runIds: Iterable<string>): Turn[] {
+  const wanted = new Set(runIds);
+  if (!wanted.size) return [];
+  return readAll<Turn>(FILES.turns)
+    .filter((turn) => wanted.has(turn.runId))
+    .sort((a, b) => a.runId.localeCompare(b.runId) || a.index - b.index);
 }
 
 // --- rejected generation-attempt audit -----------------------------------

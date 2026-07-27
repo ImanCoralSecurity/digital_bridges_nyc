@@ -434,6 +434,7 @@ export default function ProjectsDashboard() {
                 <div className="inline">
                   <h3 style={{ margin: 0 }}><Link href={`/projects/${project.id}`}>{project.name}</Link></h3>
                   <Badge kind={projectStatusKind(project.status)}>{project.status}</Badge>
+                  {project.published && <Badge kind="green">published</Badge>}
                   {project.mock && <Badge kind="gray">mock</Badge>}
                 </div>
                 <p className="meta mono" style={{ margin: "5px 0 12px" }}>{project.id}</p>
@@ -453,7 +454,14 @@ export default function ProjectsDashboard() {
                   {project.reasoningEffort ? ` · ${project.reasoningEffort} reasoning` : ""}
                   {` · ${project.selection}`}
                 </p>
-                <Link href={`/projects/${project.id}`} className="button-link">Open project →</Link>
+                <div className="inline" style={{ marginTop: "auto" }}>
+                  <Link href={`/projects/${project.id}`} className="button-link">Open project →</Link>
+                  {project.published && (
+                    <Link href={`/public/projects/${project.id}`} className="button-link secondary-link">
+                      Public page →
+                    </Link>
+                  )}
+                </div>
               </article>
             );
           })}

@@ -189,6 +189,11 @@ export function deleteProject(projectId: string): Promise<DeleteProjectResult> {
   return withEnqueueLock(async () => {
     const project = getProject(projectId);
     if (!project) throw new Error(`Project not found: ${projectId}`);
+    if (project.published) {
+      throw new ProjectDeletionConflictError(
+        `Project ${project.id} is published. Unpublish it before deleting the project.`,
+      );
+    }
     assertProjectDeletionIsIdle(project);
     const preservedRunCount = listRuns().filter(
       (run) => run.config.projectId === projectId,

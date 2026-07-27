@@ -8,7 +8,8 @@ methodology adherence and safety and can turn them into a labeled, human-reviewe
 — a working implementation of the *Digital Bridges NYC* project amendment.
 
 > **Ethics first.** All personas are **fictional**. All generated content is **clearly labeled
-> AI-generated**, carries full provenance, and **cannot be published without human sign-off**.
+> AI-generated**, carries full provenance, and **cannot be published without an administrator's
+> explicit publish action**.
 > Personas never impersonate real people, and evaluation metrics describe the *simulation only* —
 > not real-world reconciliation. See [`docs/TOOLKIT.md`](docs/TOOLKIT.md).
 
@@ -98,7 +99,10 @@ that omit `provider`.
 
 ### Using it
 
-1. **Projects dashboard** (`/`) — create and list persistent projects. Creation captures the project
+1. **Public site** (`/public`) — the default destination for visitors who are not logged in. It lists
+   published projects and shows only allowlisted
+   fictional persona fields and successfully completed session transcripts. Everything is read only.
+2. **Projects dashboard** (`/`, after administrator login) — create and list persistent projects. Creation captures the project
    name and introduction, number of sessions, shared Muslim/Jewish attendee roster, number of
    project-scoped challenge voices per community, model/reasoning settings, turn order, and mock mode.
    The model dropdown
@@ -110,19 +114,22 @@ that omit `provider`.
    - GPT-5.3 Codex Spark (`gpt-5.3-codex-spark`) — fast preview
 
    Reasoning choices are Low, Medium (default), High, and Extra high.
-2. **Project detail** (`/projects/[id]`) — configure each pre-created session shell with its own
+3. **Project detail** (`/projects/[id]`) — configure each pre-created session shell with its own
    topic and number of go-rounds, submit it to the background queue, and follow the resulting run
-   record. Session 1 reserves round 1 for mandatory introductions; its configured round count
-   includes that introduction.
-3. **Jobs** (`/jobs`) — see and control queued, running, pause-requested, paused, and
+   record. After at least one session completes, **Publish project** creates a public read-only view
+   at `/public/projects/[id]`. The release is a frozen snapshot; later persona edits and reruns stay
+   private until **Update public page** is selected. **Unpublish** removes access immediately.
+   Session 1 reserves round 1 for mandatory introductions; its configured round count includes that introduction.
+4. **Jobs** (`/jobs`) — see and control queued, running, pause-requested, paused, and
    cancel-requested work; inspect cumulative active time; and open completed, cancelled, or failed
    history and transcript links.
-4. **Run detail** (`/runs/[id]`) — read the accepted, annotated transcript and evaluation matrices;
+5. **Run detail** (`/runs/[id]`) — read the accepted, annotated transcript and evaluation matrices;
    lazily inspect paginated rejected-generation evidence and exact records; then generate campaign
    drafts.
-5. **Content Review** (`/content`) — review provenance, approve/reject/edit, publish to a partner
+6. **Content Review** (`/content`) — review provenance, approve/reject/edit, publish to a partner
    channel (disclosure is always attached), and take content down.
-6. **Showcase** (`/showcase`) — a read-only, projector-friendly view for the public event.
+7. **Operator showcase** (`/showcase`) — an authenticated, projector-friendly preview. This is
+   separate from the unauthenticated published-project site.
 
 ### Persistent project workflow
 
@@ -299,13 +306,16 @@ preserves the prior Run, and updates the session to point to the newest `runId`.
 
 ### Project and jobs API
 
-All routes are authenticated by the same middleware as the browser UI.
+All routes in this table are authenticated by the same middleware as the operator UI. Public
+project pages are server-rendered through a strict allowlist and do not expose the private project,
+run, persona, job, or audit APIs.
 
 | Method and route | Purpose |
 |---|---|
 | `GET /api/projects` | List persistent projects, newest first. |
 | `POST /api/projects` | Create a project, shared roster, one-time challenge assignments, and X session shells. |
 | `GET /api/projects/[id]` | Read one project with its embedded sessions. |
+| `PATCH /api/projects/[id]` | Set `{ "published": true | false }`; `true` creates or replaces the frozen safe snapshot and requires at least one non-empty completed transcript. |
 | `DELETE /api/projects/[id]` | Remove an idle project plan while preserving historical jobs, runs, transcripts, and audits. |
 | `GET /api/projects/[id]/sessions/[sessionId]` | Read one session together with its project. |
 | `PATCH /api/projects/[id]/sessions/[sessionId]` | Set the session's `topic` and `rounds`. |
@@ -360,7 +370,9 @@ python3 scripts/test_escalation_response.py --attempt-id <attempt_id> --current-
 
 ```
 app/                    Next.js App Router
-  page.tsx              Projects dashboard and creation controls
+  page.tsx              Authenticated projects dashboard and creation controls
+  public/page.tsx       Public published-project landing page
+  public/projects/[id]/page.tsx Safe, read-only persona and completed-transcript view
   projects/[id]/page.tsx Per-session topic/round configuration and run launcher
   jobs/page.tsx         Background job status, controls, history, and active durations
   runs/[id]/page.tsx    Transcript + metrics + lazy rejected-attempt audit + content generation
@@ -378,6 +390,7 @@ lib/
   personas.ts           Persona loader + system-prompt compilation
   personaRules.ts       Exact roster and NYC-upbringing invariants
   projects.ts           Persistent project/session planning and execution service
+  publicProjects.ts     Frozen, allowlisted public-project read model
   projectRules.ts       Pure project/session cardinality, sampling, and round-cap rules
   jobQueue.ts           Persistent single-worker FIFO queue and startup reconciliation
   jobRules.ts           Pure job state, ordering, and duration transitions
@@ -414,7 +427,8 @@ evidence snapshot; production forks should normally keep their runtime store pri
 intentionally small so it can be swapped for SQLite/Postgres without changing callers. The store
 contains `projects.json` (projects with embedded session shells), `jobs.json`, `runs.json`,
 `turns.json`, `generation_attempts.json`, `semantic_validation_attempts.json`, `assets.json`, and
-`publish_logs.json`. Project creation
+`publish_logs.json`. `project_publications.json` contains only frozen, allowlisted persona and
+accepted-transcript snapshots created by explicit project publication. Project creation
 and queue/session claims use process-local file mutexes; queue-to-project-to-run/turn/attempt
 transitions span multiple files and are not a database transaction. The queue is intentionally
 limited to one Node process and one worker. The store directory is forced to mode `0700`, and every

@@ -18,7 +18,8 @@ a set of campaign-content drafts that enter a human review workflow.
 The application is a single-node, full-stack Next.js system:
 
 - Next.js 16 App Router and React 19 provide the UI and same-origin JSON API.
-- Feature pages are client components; they fetch data from route handlers after mounting.
+- Operator feature pages are client components that fetch authenticated route handlers after
+  mounting. Public project pages are dynamic server components backed by an allowlisted read model.
 - Route handlers execute domain services in the same Node.js process.
 - Real agent calls go through a provider-neutral runtime that spawns either the locally
   authenticated Codex CLI (the default) or the optional Claude CLI. The default real configuration
@@ -137,9 +138,9 @@ other external system.
 | Layer | Main location | Responsibility | Runtime |
 |---|---|---|---|
 | UI shell | `app/layout.tsx`, `app/globals.css` | Metadata, navigation, global styling | React server shell + CSS |
-| Feature UI | `app/**/page.tsx`, `app/logout-button.tsx` | Forms, local state, API calls, rendering | Browser (`"use client"`) |
+| Feature UI | `app/**/page.tsx`, `app/logout-button.tsx` | Operator forms/API calls plus server-rendered public project views | Browser and Node server components |
 | Shared UI | `app/ui.tsx`, `app/models.ts`, `lib/gptModels.ts` | Fetch wrapper, formatters, badges, Codex GPT model/reasoning options | Browser-safe |
-| Access gate | `middleware.ts`, `lib/auth.ts` | Password token verification and redirects/401s | Middleware/Web Crypto |
+| Access gate | `middleware.ts`, `lib/auth.ts` | Public-route allowlist, password token verification, redirects, and API 401s | Middleware/Web Crypto |
 | HTTP API | `app/api/**/route.ts` | Parse requests and serialize domain results | Node route handlers |
 | Domain services | `lib/jobQueue.ts`, `lib/projects.ts`, `lib/orchestrator.ts`, `lib/content.ts`, `lib/publishing.ts` | Persistent job execution, project/session planning, dialogue, generation, review lifecycle | Node only |
 | Domain policy | `lib/jobRules.ts`, `lib/projectRules.ts`, `lib/methodology.ts`, `lib/challengeCadence.ts`, `lib/dialogueQuality.ts`, `lib/dialogueFlow.ts`, `lib/evaluation.ts`, `lib/personas.ts` | FIFO/job transitions, project cardinality/sampling, prompts, phase-specific dialogue validation, metrics, persona rules | Mostly pure; persona I/O is Node only |
@@ -254,7 +255,9 @@ store plus persona files when editing them.
 | Route | Component | Main behavior |
 |---|---|---|
 | `/login` | `app/login/page.tsx` | Submits the shared password and redirects to `next` or `/`. |
-| `/` | `app/page.tsx` | Loads projects, personas, and health; creates a persistent project and lists existing projects. |
+| `/` | `app/page.tsx` | Authenticated dashboard; unauthenticated requests redirect to `/public`. |
+| `/public` | `app/public/page.tsx` | Lists published projects or shows the empty state. |
+| `/public/projects/[id]` | `app/public/projects/[id]/page.tsx` | Server-renders allowlisted persona fields and completed, ownership-checked transcripts with no controls. |
 | `/personas` | `app/personas/page.tsx` | Loads full persona records and saves edits. |
 | `/projects/[id]` | `app/projects/[id]/page.tsx` | Displays the shared roster and one-time challenge assignments; configures, queues, and removes session plans; removes the project; polls active jobs and links to their controls in Jobs. |
 | `/jobs` | `app/jobs/page.tsx` | Groups all active control states separately from terminal history; exposes Pause, Continue, and Kill where valid; shows cumulative active time, errors, and transcript links. |
@@ -262,17 +265,18 @@ store plus persona files when editing them.
 | `/content` | `app/content/page.tsx` | Lists and filters assets; performs review and publishing actions. |
 | `/showcase` | `app/showcase/page.tsx` | Presents evaluated runs and locally published assets. |
 
-Every feature page above is client-rendered and uses `useEffect` plus local React state. There is no
-server-side feature-data loading, transcript progress stream, Suspense boundary, or shared
-query/cache library. While a project session's linked job is in any nonterminal state—`queued`,
+Every operator feature page above is client-rendered and uses `useEffect` plus local React state. The
+two `/public` routes are dynamic server components. There is no transcript progress stream,
+Suspense boundary, or shared query/cache library. While a project session's linked job is in any nonterminal state—`queued`,
 `running`, `pause-requested`, `paused`, or `cancel-requested`—the project detail page polls
 `GET /api/projects/[id]` every three seconds. The Jobs page polls `GET /api/jobs` on the same interval
 while any job is nonterminal and updates cumulative active-time displays every second. Session
 submission returns 202 after persistent queue acceptance, so refreshing, navigating away, or closing
 the browser does not cancel the work. Reopening `/projects/[id]` or `/jobs` re-reads persisted state.
 On run detail, the rejected-attempt summary request is deferred until the outer audit disclosure is
-opened, and an exact record is requested only when its row is expanded. The root layout is shared by
-the login page as well, so the normal navigation and footer also surround `/login`.
+opened, and an exact record is requested only when its row is expanded. The auth-aware root layout
+shows published-project and login links to public visitors; a valid cookie reveals the complete
+operator navigation and Lock control.
 
 Despite its presentation-oriented name, `/showcase` is protected by the same middleware as the rest
 of the workspace; it is not a public route.
@@ -293,6 +297,7 @@ All API handlers are marked `dynamic = "force-dynamic"`.
 | `GET /api/projects` | `listProjects()` | All projects, newest first, with embedded session shells. |
 | `POST /api/projects` | `createProject()` | Creates the project, shared roster snapshot, one-time balanced challenge assignment, and X sessions. |
 | `GET /api/projects/[id]` | `getProject()` | One complete project aggregate. |
+| `PATCH /api/projects/[id]` | `setProjectPublication()` | Creates/replaces a frozen, allowlisted snapshot for `{ published: true }`, or removes it for `false`; publishing requires a non-empty completed, ownership-matched transcript. |
 | `DELETE /api/projects/[id]` | `deleteProject()` | Removes the mutable project aggregate while preserving its historical Jobs, Runs, turns, and audit records. Returns 409 while linked work is active. |
 | `GET /api/projects/[id]/sessions/[sessionId]` | Project read model | `{ project, session }`. |
 | `PATCH /api/projects/[id]/sessions/[sessionId]` | `configureProjectSession()` | Sets one session's `topic` and `rounds`. |
@@ -356,8 +361,12 @@ This is a shared workspace gate, not a user identity system.
    in the `dbridges_auth` cookie.
 3. The cookie is HttpOnly, SameSite=Lax, valid for seven days, and marked Secure only when
    `DBRIDGES_SECURE_COOKIE=1`.
-4. Middleware permits only `/login`, `/api/login`, and `/api/logout` without a valid token.
-5. Unauthenticated pages redirect to `/login`; unauthenticated APIs receive JSON 401.
+4. Middleware permits `/login`, its login/logout APIs, and `/public/**` without a valid token.
+5. An unauthenticated `/` request redirects to `/public`; other operator pages redirect to `/login`,
+   and every operator API receives JSON 401.
+6. Public pages use `lib/publicProjects.ts`, which returns only allowlisted project, fictional-persona,
+   and accepted-turn fields. It validates project publication plus completed Run ownership and never
+   returns jobs, models, budgets, prompts, costs, audit records, or persona safety instructions.
 
 There are no accounts, roles, server-side sessions, per-user permissions, or authenticated reviewer
 identities. Reviewer and publisher names are free-text request fields. Changing the password
@@ -401,7 +410,8 @@ erDiagram
 | Entity | Important fields and semantics |
 |---|---|
 | `Persona` | Versioned fictional identity, group, immutable student `raisedIn`, narrative and family/regional heritage, values, facilitator-only `degree` and `professionalBackground`, sensitivities, do-not rules, optional role instructions, advisor sign-off. |
-| `Project` | Name, user-authored `projectIntroduction`, `sessionCount`, immutable shared attendee IDs and display snapshot, `controversialPerCommunity`, one-time `controversialAgentIds`, shared provider/model/reasoning/order/budget/mock settings, status, and embedded session array. |
+| `Project` | Name, user-authored `projectIntroduction`, optional `published`/`publishedAt` public-visibility state, `sessionCount`, immutable shared attendee IDs and display snapshot, `controversialPerCommunity`, one-time `controversialAgentIds`, shared provider/model/reasoning/order/budget/mock settings, status, and embedded session array. |
+| `ProjectPublicationSnapshot` | Frozen allowlist created by an explicit publish/update action: project title/introduction, safe fictional-student fields, and non-empty accepted turns from the latest completed owned Run for each included session. It contains no jobs, model/budget/cost data, audit prompts, validation metadata, or persona safety instructions. |
 | `ProjectSession` | Stable ID plus parent project ID, one-based `number`, independently configured `topic` and `rounds`, `mandatoryIntroductionRound`, status/reason, optional latest `jobId`/`runId`, timestamps, and optional read-model `jobStatus` used to distinguish two kinds of paused session. |
 | `Job` | Persistent `project-session-run` work item with the eight-state control FSM, project/session snapshot and IDs, optional run/result/error, first/current start and control timestamps, claim and resume counts, promotion timestamp, and cumulative active `durationMs`. |
 | `Run` | Config including provider/model/reasoning and optional `projectId`, `projectSessionId`, `projectSessionNumber`, `jobId`, `controversialAgentIds`, `introductionRound`, and session-one project-introduction/credential snapshot; attendee display snapshot, persona version map, seven-state lifecycle, accumulated known agent cost and its availability flag, methodology version, optional metrics. |
@@ -946,12 +956,13 @@ takedown does not require current `published` state, and partner names are not s
 
 ### Runtime store
 
-`lib/db.ts` stores eight JSON arrays. The directory defaults to `data/store` and can be overridden
+`lib/db.ts` stores nine JSON arrays. The directory defaults to `data/store` and can be overridden
 with `DBRIDGES_STORE_DIR`:
 
 | File | Contents |
 |---|---|
 | `data/store/projects.json` | Projects with shared settings, attendee snapshots, one-time challenge assignments, and embedded session shells |
+| `data/store/project_publications.json` | Frozen, safe public-project snapshots produced by explicit publish/update actions |
 | `data/store/jobs.json` | Persistent project-session jobs, control/claim/resume timestamps, cumulative active duration, result linkage, and errors |
 | `data/store/runs.json` | Runs with embedded metrics |
 | `data/store/turns.json` | All dialogue turns |
