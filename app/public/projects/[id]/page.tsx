@@ -51,7 +51,7 @@ export default async function PublicProjectPage({ params }: PageProps) {
       <div className="grid grid-3 public-stats">
         <Tile label="Fictional students" value={project.personaCount} sub={`${muslim} Muslim · ${jewish} Jewish`} />
         <Tile label="Sessions available" value={`${project.completedSessionCount} / ${project.sessionCount}`} />
-        <Tile label="Access" value="Read only" sub="Editing requires administrator login" />
+        <Tile label="Access" value="Read only" sub="Editing is available in the private project workspace" />
       </div>
 
       <p className="public-skip-link"><a href="#sessions-heading">Skip to session transcripts ↓</a></p>

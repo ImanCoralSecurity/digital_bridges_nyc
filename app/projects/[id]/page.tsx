@@ -64,7 +64,9 @@ export default function ProjectWorkspace() {
   const [project, setProject] = useState<Project | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  const [publishingProject, setPublishingProject] = useState(false);
+  const [publicationAction, setPublicationAction] = useState<
+    "publish" | "update" | "unpublish" | null
+  >(null);
   const [deletingProject, setDeletingProject] = useState(false);
   const [deletingSessionId, setDeletingSessionId] = useState<string | null>(null);
 
@@ -183,6 +185,7 @@ export default function ProjectWorkspace() {
   async function setPublication(nextPublished: boolean) {
     if (!project) return;
     const updating = nextPublished && project.published;
+    const action = updating ? "update" : nextPublished ? "publish" : "unpublish";
     const confirmed = window.confirm(
       updating
         ? `Update the public page for “${project.name}”? This replaces its public snapshot with the current persona profiles and latest successfully completed transcripts.`
@@ -192,7 +195,7 @@ export default function ProjectWorkspace() {
     );
     if (!confirmed) return;
 
-    setPublishingProject(true);
+    setPublicationAction(action);
     setError("");
     setNotice("");
     try {
@@ -211,7 +214,7 @@ export default function ProjectWorkspace() {
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : String(caught));
     } finally {
-      setPublishingProject(false);
+      setPublicationAction(null);
     }
   }
 
@@ -222,7 +225,7 @@ export default function ProjectWorkspace() {
   const jewish = project.attendees.filter((attendee) => attendee.group === "jewish");
   const challengeIds = new Set(project.controversialAgentIds);
   const completed = project.sessions.filter((session) => session.status === "completed").length;
-  const hasRecordedRun = project.sessions.some((session) => Boolean(session.runId));
+  const publicationBusy = publicationAction !== null;
   const maxRounds = maxRoundsForRoster(project.attendeeIds.length);
 
   return (
@@ -257,33 +260,31 @@ export default function ProjectWorkspace() {
             <>
               <button
                 type="button"
-                disabled={publishingProject || deletingProject || deletingSessionId !== null}
+                disabled={publicationBusy || deletingProject || deletingSessionId !== null}
                 onClick={() => void setPublication(true)}
               >
-                {publishingProject ? "Updating publication…" : "Update public page"}
+                {publicationAction === "update" ? "Updating public page…" : "Update public page"}
               </button>
               <button
                 type="button"
                 className="secondary"
-                disabled={publishingProject || deletingProject || deletingSessionId !== null}
+                disabled={publicationBusy || deletingProject || deletingSessionId !== null}
                 onClick={() => void setPublication(false)}
               >
-                Unpublish
+                {publicationAction === "unpublish" ? "Unpublishing…" : "Unpublish"}
               </button>
             </>
           ) : (
             <button
               type="button"
               disabled={
-                publishingProject ||
+                publicationBusy ||
                 deletingProject ||
-                deletingSessionId !== null ||
-                !hasRecordedRun
+                deletingSessionId !== null
               }
-              title={!hasRecordedRun ? "Complete at least one session before publishing." : undefined}
               onClick={() => void setPublication(true)}
             >
-              {publishingProject ? "Publishing…" : "Publish project"}
+              {publicationAction === "publish" ? "Publishing…" : "Publish project"}
             </button>
           )}
           <button
@@ -292,7 +293,7 @@ export default function ProjectWorkspace() {
             disabled={
               deletingProject ||
               deletingSessionId !== null ||
-              publishingProject ||
+              publicationBusy ||
               project.published
             }
             title={project.published ? "Unpublish this project before removing it." : undefined}
@@ -314,10 +315,8 @@ export default function ProjectWorkspace() {
             reruns stay private until you choose Update public page. {" "}
             <Link href={`/public/projects/${project.id}`}>Open the public page →</Link>
           </>
-        ) : hasRecordedRun ? (
-          "This project is private. Publish it when its personas and completed transcripts are ready for public viewing."
         ) : (
-          "This project is private. Complete at least one session before publishing it."
+          "This project is private. Publishing captures only successfully completed, non-empty transcripts and will verify that at least one is available."
         )}
       </div>
 

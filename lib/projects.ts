@@ -5,6 +5,7 @@ import {
   deleteProjectPublication,
   getJob,
   getProject,
+  getProjectPublication,
   insertProject,
   listRuns,
   listTurnsByRunIds,
@@ -51,6 +52,21 @@ export interface CreateProjectInput {
   selection?: SelectionStrategy;
   budgetUsd?: number;
   mock?: boolean;
+}
+
+const globalForProjectPublication = globalThis as typeof globalThis & {
+  __digitalBridgesProjectPublicationQueue?: Promise<void>;
+};
+
+function withProjectPublicationLock<T>(task: () => Promise<T>): Promise<T> {
+  const prior = globalForProjectPublication.__digitalBridgesProjectPublicationQueue
+    ?? Promise.resolve();
+  const result = prior.then(task);
+  globalForProjectPublication.__digitalBridgesProjectPublicationQueue = result.then(
+    () => undefined,
+    () => undefined,
+  );
+  return result;
 }
 
 function normalizedProjectIntroduction(
@@ -260,6 +276,13 @@ export async function setProjectPublication(
   projectId: string,
   published: boolean,
 ): Promise<Project> {
+  return withProjectPublicationLock(() => setProjectPublicationLocked(projectId, published));
+}
+
+async function setProjectPublicationLocked(
+  projectId: string,
+  published: boolean,
+): Promise<Project> {
   const project = getProject(projectId);
   if (!project) throw new Error(`Project not found: ${projectId}`);
 
@@ -278,17 +301,36 @@ export async function setProjectPublication(
   const updatedAt = new Date().toISOString();
   const publishedAt = project.publishedAt ?? updatedAt;
   const publication = buildProjectPublication(project, publishedAt, updatedAt);
+  const previousPublication = getProjectPublication(projectId);
   await upsertProjectPublication(publication);
-  return mutateProject(projectId, (current) => {
-    if (current.id !== project.id) {
-      throw new Error("Project changed while its public snapshot was being prepared.");
+  try {
+    return await mutateProject(projectId, (current) => {
+      if (current.updatedAt !== project.updatedAt) {
+        throw new Error(
+          "Project changed while its public snapshot was being prepared. Try publishing again.",
+        );
+      }
+      return {
+        ...current,
+        published: true,
+        publishedAt,
+      };
+    });
+  } catch (error) {
+    // Snapshot and project live in separate atomic JSON collections. Restore
+    // the last visible release when a concurrent project mutation wins.
+    const latestProject = getProject(projectId);
+    if (
+      latestProject?.published &&
+      previousPublication &&
+      latestProject.publishedAt === previousPublication.publishedAt
+    ) {
+      await upsertProjectPublication(previousPublication);
+    } else {
+      await deleteProjectPublication(projectId);
     }
-    return {
-      ...current,
-      published: true,
-      publishedAt,
-    };
-  });
+    throw error;
+  }
 }
 
 export async function configureProjectSession(

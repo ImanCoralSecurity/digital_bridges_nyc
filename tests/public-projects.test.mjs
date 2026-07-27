@@ -138,6 +138,38 @@ test("a completed run with no accepted turns cannot be published", async () => {
   assert.equal(getPublishedProject(projectId), undefined);
 });
 
+test("a concurrent project change cannot publish a stale snapshot", async () => {
+  const projectId = "project_publish_race";
+  const completed = session(projectId, 1, {
+    status: "completed",
+    runId: "run_publish_race",
+  });
+  await db.insertProject(project(projectId, [completed]));
+  await db.insertRun(run("run_publish_race", projectId, completed.id));
+  await db.insertTurn({
+    id: "turn_publish_race",
+    runId: "run_publish_race",
+    index: 0,
+    role: "facilitator",
+    speakerName: "Sam",
+    speakerGroup: "facilitator",
+    text: "A complete transcript captured before the race.",
+    createdAt: "2026-07-27T10:01:00.000Z",
+  });
+
+  const [publicationResult, mutationResult] = await Promise.allSettled([
+    setProjectPublication(projectId, true),
+    db.updateProject(projectId, { name: "Changed during publication" }),
+  ]);
+
+  assert.equal(mutationResult.status, "fulfilled");
+  assert.equal(publicationResult.status, "rejected");
+  assert.match(publicationResult.reason.message, /changed while its public snapshot/i);
+  assert.equal(db.getProject(projectId)?.published, undefined);
+  assert.equal(db.getProjectPublication(projectId), undefined);
+  assert.equal(getPublishedProject(projectId), undefined);
+});
+
 test("public projection exposes only safe persona fields and completed owned transcripts", async () => {
   const projectId = "project_publishable";
   const completed = session(projectId, 1, {
@@ -262,4 +294,34 @@ test("unpublishing removes public access immediately", async () => {
     listPublishedProjectSummaries().some((project) => project.id === projectId),
     false,
   );
+});
+
+test("concurrent update and unpublish requests serialize to a consistent final state", async () => {
+  const projectId = "project_serial_publication";
+  const completed = session(projectId, 1, {
+    status: "completed",
+    runId: "run_serial_publication",
+  });
+  await db.insertProject(project(projectId, [completed]));
+  await db.insertRun(run("run_serial_publication", projectId, completed.id));
+  await db.insertTurn({
+    id: "turn_serial_publication",
+    runId: "run_serial_publication",
+    index: 0,
+    role: "facilitator",
+    speakerName: "Sam",
+    speakerGroup: "facilitator",
+    text: "A complete transcript.",
+    createdAt: "2026-07-27T10:01:00.000Z",
+  });
+  await setProjectPublication(projectId, true);
+
+  await Promise.all([
+    setProjectPublication(projectId, true),
+    setProjectPublication(projectId, false),
+  ]);
+
+  assert.equal(db.getProject(projectId)?.published, false);
+  assert.equal(db.getProjectPublication(projectId), undefined);
+  assert.equal(getPublishedProject(projectId), undefined);
 });
